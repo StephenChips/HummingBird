@@ -1,0 +1,175 @@
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    overflow: hidden;
+    color: #FFF;
+}
+
+
+header h1 {
+    align-items: center;
+    font-size: 48px;
+    margin-top: 30px;
+    background: #8ad1e2;
+    border-right: 3px solid #78afbd;
+    border-left: 100px solid #78afbd;
+    padding: 30px 40px 30px 40px;
+}
+
+.header-nav .header-list {
+    margin-left: 50px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.header-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    flex: 1 1;
+    background: #78afbd;
+    margin-top: 20px;
+    padding: 10px 50px 10px 0;
+    height: 100px;
+}
+
+.header-list > li {
+    list-style-type: none;
+    font-size: 24px;
+}
+
+.header-list > li.active {
+    border-bottom: 3px solid #FFF;
+    padding: 3px;
+}
+
+.header-list li.active > a {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.header-list li > a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 35px;
+}
+
+.header-list li:not(:first-child) {
+    margin-left: 3%;
+}
+
+
+/** main part **/
+
+main {
+    background: white;
+    min-height: 500px;
+}
+
+.container {
+    overflow: hidden;
+}
+
+h1.main-header {
+    margin: 40px 0 20px 0;
+}
+
+h1.main-header > .header-item {
+    font-size: 35px;
+    color: #252525;
+    vertical-align: baseline;
+}
+
+h1.main-header > a {
+    color: inherit;
+}
+
+h1.main-header > a.active {
+    color: #8ad1e2;
+    font-size: 75px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.article-info {
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    background: rgb(255, 235, 184);
+    padding: 35px 40px 30px 50px;
+    margin-bottom: 20px;
+}
+
+.article-info:nth-of-type(2n) {
+    background: rgb(228, 233, 204);
+}
+.article-info:last-child {
+    margin-bottom: 0;
+}
+
+.article-info > .article-category {
+    font-size: 14px;
+    color: #757575;
+}
+.article-info > .article-category > a {
+    color: inherit;
+    font-weight: bold;
+}
+
+.article-info > .article-title {
+    margin-bottom: 20px;
+}
+
+.article-info > .article-title > a {
+    color: #545454;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.article-info > .article-publish-date {
+    color: #757575;
+    font-size: 16px;
+}
+
+/* Fix bootstrap pagination's links' color */
+.pagination-lg .page-link {
+    color: #78afbd;
+}
+
+.main-pagination {
+    margin: 40px 0;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    background-color: #78afbd;
+    color: #fff;
+    padding: 60px;
+}
+
+footer h1 {
+    font-size: 50px;
+    margin-right: 40px;
+}
+
+footer .icons a {
+    margin-right: 1em;
+}
+
+footer img {
+    width: 1.7em;
+}
+
+footer .login {
+    margin-left: auto;
+}
