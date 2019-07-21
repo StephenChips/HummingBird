@@ -64,6 +64,10 @@ header .header-list > li.active {
     padding: 0 40px;
 }
 
+header .header-list > li.about:not(.active) {
+    margin-left: auto;
+}
+
 header .header-list > li.active > a {
     font-size: 48px;
     font-weight: bold;
@@ -77,39 +81,20 @@ header .header-list > li > a {
 }
 
 @media (max-width: 992px) {
-    header .heading {
+    header h1 {
         padding: 20px 30px 20px 30px;
-        font-size: 36px;
-        border: 0;
-        border-right: 5px solid #78afbd;
     }
 
     header .header-list {
-        height: 80px;
+        height: 90px;
     }
-
-    header .header-list > li > a {
+    header .header-list > a {
         font-size: 23px;
     }
 
-    header .header-list > li.active > a {
-        font-size: 22px;
-    }
-
-    header .header-list > li.active {
-        order: 0;
-        margin-left: 0;
-        border: 0;
-        background: none;
-        color: white;
-        padding: 0;
-        margin-left: 3%;
-    }
-}
-
-@media (max-width: 768px) {
     header .header-list > a.active {
-        font-size: 23px;
+        font-size: 22px;
+        vertical-align: 1px;
     }
 }
 
