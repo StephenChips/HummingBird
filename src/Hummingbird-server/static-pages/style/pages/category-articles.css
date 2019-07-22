@@ -126,13 +126,17 @@ main {
 
 h1.main-header {
     margin: 40px 0 20px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
-h1.main-header > .header-item {
+h1.main-header > .back-btn {
     font-size: 35px;
-    color: #545454;
-    vertical-align: baseline;
+    color: #78afbd;
+    padding: 3px 25px 3px 0;
 }
+
 
 h1.main-header > a {
     color: inherit;
@@ -145,8 +149,46 @@ h1.main-header > a.active {
     text-decoration: none;
 }
 
-.section-list .card .card-title a {
-    color: #78afbd;
+h1.main-header > .header-content {
+    display: inline-block;
+}
+
+.article-info {
+    box-sizing: border-box;
+    background: rgb(255, 235, 184);
+    padding: 35px 40px 30px 50px;
+    margin-bottom: 20px;
+}
+
+.article-info:nth-of-type(2n) {
+    background: rgb(228, 233, 204);
+}
+.article-info:last-child {
+    margin-bottom: 0;
+}
+
+.article-info > .article-category {
+    font-size: 14px;
+    color: #757575;
+}
+.article-info > .article-category > a {
+    color: inherit;
+    font-weight: bold;
+}
+
+.article-info .article-title {
+    margin-bottom: 20px;
+}
+
+.article-info .article-title > a {
+    color: #545454;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.article-info > .article-publish-date {
+    color: #757575;
+    font-size: 16px;
 }
 
 .pagination {
@@ -179,6 +221,20 @@ h1.main-header > a.active {
 
     h1.main-header a.header-item {
         font-size: 28px;
+    }
+
+    .article-info {
+        padding: 20px 30px 20px 40px;
+    }
+
+    .article-info .article-title {
+        margin-bottom: 10px;
+    }
+
+    .article-info .article-title > a {
+        color: #545454;
+        font-size: 25px;
+        font-weight: bold;
     }
 }
 
@@ -217,4 +273,9 @@ footer .login {
     footer {
         height: 160px;
     }
+}
+
+.btn-circle {
+    border-radius: 100px;
+    background: #78afbd;
 }

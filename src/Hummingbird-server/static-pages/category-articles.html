@@ -3,7 +3,7 @@
   <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style/pages/categories.css">
+    <link rel="stylesheet" href="./style/pages/category-articles.css">
   </head>
   <body>
 
@@ -14,8 +14,9 @@
       </h1>
       <ul class="header-list">
         <li><a href="#">Home</a></li>
-        <li class=""><a href="#">Code</a></li>
+        <li class="active"><a href="#">Code</a></li>
         <li><a href="#">Life</a></li>
+        <li class="about"><a href="#">About</a></li>
         <li>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,72 +29,52 @@
             </div>
           </div>
         </li>
-        <li class="about active"><a href="#">About</a></li>
       </ul>
     </header>
 
     <main>
       <div class="container">
         <h1 class="main-header">
-          <a class="header-item" href="#">Articles</a>
-          <span class="header-item">/</span>
-          <a class="active header-item" href="#">Categories</a>
+          <a class="back-btn" href="#">&lt;</a>
+          <div class="header-content"> 
+            Articles in category <strong class="category-name">WordSpace My Kqer dism Weqdlv cjvq</strong>
+          </div>
         </h1>
 
-        <section class="section-list row">
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
+        <section class="article-lists">
+          <div class="article-info">
+              <div class="article-category">Category: <a href="#">East Mountain and Hills</a></div>
+              <h3 class="article-title"><a href="#">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a></h3>
+              <div class="article-publish-date">
+                Publish in {{YYYY/MM/DD}}
               </div>
-            </div>
           </div>
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
+          <div class="article-info">
+              <h3 class="article-title"><a href="#">Neq est qui dolorem ipsum quia dolor sit amet</a></h3>
+              <div class="article-publish-date">
+                Publish in {{YYYY/MM/DD}}
               </div>
-            </div>
           </div>
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
+          <div class="article-info">
+              <div class="article-category">Category: <a href="#">East Mountain and Hills</a></div>
+              <h3 class="article-title"><a href="#">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a></h3>
+              <div class="article-publish-date">
+                Publish in {{YYYY/MM/DD}}
               </div>
-            </div>
           </div>
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
+          <div class="article-info">
+              <div class="article-category">Category: <a href="#">East Mountain and Hills</a></div>
+              <h3 class="article-title"><a href="#">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a></h3>
+              <div class="article-publish-date">
+                Publish in {{YYYY/MM/DD}}
               </div>
-            </div>
           </div>
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
+          <div class="article-info">
+              <div class="article-category">Category: <a href="#">East Mountain and Hills</a></div>
+              <h3 class="article-title"><a href="#">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a></h3>
+              <div class="article-publish-date">
+                Publish in {{YYYY/MM/DD}}
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-6 pb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h4><a href="#">Category A</a></h4>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
