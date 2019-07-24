@@ -1,0 +1,39 @@
+{{!
+  Data:
+  1. sectionsInNavBar: List { title: string, href: string }
+  2. sectionsInDropdownMenu List { title: string, herf: string },
+  3. currentActiveSection: { title: string, herf: string }
+}}
+
+<header>
+  <h1 class="heading">
+    <a href="/" class="text-white">
+      Hummingbird<br>
+      Blog
+    </a>
+  </h1>
+  <ul class="header-list">
+      {{#currentActiveSection}}
+      <li class="active"><a href="{{href}}">{{title}}</a></li>
+      {{/currentActiveSection}}
+      
+      {{#sectionsInNavBar}}
+      <li><a href="{{href}}">{{title}}</a></li>
+      {{/sectionsInNavBar}}
+
+      <li class="about"><a href="/sections/about">About</a></li>
+
+      <li>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#sectionsInDropdownMenu}}
+              <a class="dropdown-item" href="{{href}}">{{title}}</a>
+            {{/sectionsInDropdownMenu}}
+          </div>
+        </div>
+      </li>
+  </ul>
+</header>

@@ -18,3 +18,12 @@
         3. When animation above is done, the header list will become a content block, which contains two parts: the title "All section" shown at the first line, following with a list of sections' names that may take mulitple lines, seperated by some bottom margin.
         4. User can click the section links to jump to the other new section, or click any outside background to cancel the action.
         5. the header list will return what it look when user cancel the action.
+
+
+!!! Seperate the files
+1. Footer
+2. Header
+3. ContentHeader
+4. Paginator
+5. ArticleInfo
+6. CategoryList

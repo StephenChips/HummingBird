@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{> commonMetas}}
+    {{> commonStyles}}
+    <link rel="stylesheet" href="/assets/stylesheets/article.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <a class="navbar-brand" href="#">Hummingbird Blog Articles</a>
+      <a class="btn btn-outline-primary" href="#">Back</a>
+    </nav>
+    <div class="container">
+      <div class="article-heading my-4">
+        <div>Category <a href="{{category.href}}">{{category.title}}</a></div>
+        <h1 class="display-4">{{title}}</h1>
+        <div>{{publishDate}}</div>
+      </div>
+      <article>
+        {{content}}
+      </article>
+    </div>
+  </body>
+</html>

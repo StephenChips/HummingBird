@@ -1,0 +1,12 @@
+<footer>
+    <h1 class="heading">
+    Hummingbird<br>Blog
+    </h1>
+    <div class="icons">
+    <a href="mailto:tcw6991@gmail.com"><img src="/assets/images/icons8-email-light-50.png" /></a>
+    <a href="https://github.com/StephenChips"><img src="/assets/images/GitHub-Mark-Light-32px.png" alt="Github logo" /></a>
+    </div>
+    <div class="login">
+    <a href="/login"><img src="/assets/images/icons8-login-light-48.png" alt="Login"></a>
+    </div>
+</footer>

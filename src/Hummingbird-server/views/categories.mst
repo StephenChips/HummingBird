@@ -1,0 +1,57 @@
+{{! This template expects following data in your view data object:
+
+  1. title: string
+
+  2. header: {
+    sectionsInNavBar: List of { title: string, href: string }
+    sectionsInDropdownMenu List { title: string, herf: string },
+    currentActiveSection: { title: string, herf: string }
+  }
+
+  3. contentHeader: {
+    showArticle: boolean
+    showCategory: boolean
+  }
+
+  4. categoryInfoList: List of {
+    { href: string, title: string },
+  }
+
+  5. paginator: {
+    paginatorItemList: List of {
+      pageNumber: number, href: string, isActive: boolean
+    }
+
+    disabledButtonPreviousClass: "disabled" | ""
+    disabledButtonNextClass: "disabled" | ""
+    previousHref: string
+    nextHref: string
+
+    paginatorSizeClass: "pagination-lg" | "pagination-sm" | ""
+  }
+}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{> commonMetas}}
+    {{> commonStyles}}
+    <link rel="stylesheet" href="/assets/stylesheets/sections.css">
+  </head>
+  <body>
+    {{# header}}{{> header}}{{/ header}}
+
+    <main>
+      <div class="container">
+        {{# contentHeader}}{{> contentHeader}}{{/ contentHeader}}
+        {{> categoryInfoList}}
+        {{# paginator}}{{> paginator}}{{/ paginator}}
+      </div>
+    </main>
+
+    {{> footer}}
+  </body>
+
+  {{> commonScripts}}
+  <script src="/assets/javascripts/sections.js" type="text/javascript"></script>
+</html>

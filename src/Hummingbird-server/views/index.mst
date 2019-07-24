@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <h1>Nested list</h1>
+  <div>
+  {{> list}}
+  </div>
+</body>
+</html>

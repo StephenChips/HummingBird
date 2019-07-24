@@ -1,0 +1,268 @@
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.heading.sm-heading {
+    display: block;
+    font-size: 35px;
+    letter-spacing: 1px;
+    line-height: 1.3em;
+    border-left: 0;
+}
+
+.heading {
+    font-size: 48px;
+    letter-spacing: 1px;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #FFF;
+}
+
+
+header .heading {
+    align-items: center;
+    background: #8ad1e2;
+    border-left: 100px solid #78afbd;
+    border-right: 5px solid #78afbd;
+    padding: 30px;
+}
+
+header .header-list {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background: #8ad1e2;
+    height: 120px;
+    padding: 0;
+    padding-right: 50px;
+    margin-top: -5px;
+}
+
+header .header-list > li {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    order: 1;
+    margin-left: 2%;
+}
+
+header .header-list > li.active {
+    order: 0;
+    margin-left: 0;
+    border-right: 5px solid #78afbd;
+    background: #FFF;
+    color: #78afbd;
+    padding: 0 40px;
+}
+
+header .header-list > li.active > a {
+    font-size: 48px;
+    font-weight: bold;
+    vertical-align: 4px;
+}
+
+header .header-list > li > a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 30px;
+}
+
+@media (max-width: 992px) {
+    header .heading {
+        padding: 20px 30px 20px 30px;
+        font-size: 36px;
+        border: 0;
+        border-right: 5px solid #78afbd;
+    }
+
+    header .header-list {
+        height: 80px;
+    }
+
+    header .header-list > li > a {
+        font-size: 23px;
+    }
+
+    header .header-list > li.active > a {
+        font-size: 22px;
+    }
+
+    header .header-list > li.active {
+        order: 0;
+        margin-left: 0;
+        border: 0;
+        background: none;
+        color: white;
+        padding: 0;
+        margin-left: 3%;
+    }
+}
+
+@media (max-width: 768px) {
+    header .header-list > a.active {
+        font-size: 23px;
+    }
+}
+
+/** main part **/
+
+main {
+    background: white;
+    min-height: 100vh;
+}
+
+.container {
+    overflow: hidden;
+}
+
+h1.main-header {
+    margin: 40px 0 20px 0;
+}
+
+h1.main-header > .header-item {
+    font-size: 35px;
+    color: #545454;
+    vertical-align: baseline;
+}
+
+h1.main-header > a {
+    color: inherit;
+}
+
+h1.main-header > a.active {
+    color: #8ad1e2;
+    font-size: 75px;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.article-info {
+    box-sizing: border-box;
+    background: rgb(255, 235, 184);
+    padding: 35px 40px 30px 50px;
+    margin-bottom: 20px;
+}
+
+.article-info:nth-of-type(2n) {
+    background: rgb(228, 233, 204);
+}
+.article-info:last-child {
+    margin-bottom: 0;
+}
+
+.article-info > .article-category {
+    font-size: 14px;
+    color: #757575;
+}
+.article-info > .article-category > a {
+    color: inherit;
+    font-weight: bold;
+}
+
+.article-info .article-title {
+    margin-bottom: 20px;
+}
+
+.article-info .article-title > a {
+    color: #545454;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.article-info > .article-publish-date {
+    color: #757575;
+    font-size: 16px;
+}
+
+.pagination {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* Fix bootstrap pagination's links' color */
+.pagination .page-link {
+    color: #78afbd;
+}
+
+.pagination:not(.pagination-lg) {
+    justify-content: center;
+}
+.pagination:not(.pagination-lg) .page-link {
+    padding: 15px 18px;
+    font-size: 18px;
+}
+
+
+@media (max-width: 992px) {
+    h1.main-header {
+        margin-top: 20px;
+    }
+
+    h1.main-header a.header-item.active {
+        font-size: 48px;
+    }
+
+    h1.main-header a.header-item {
+        font-size: 28px;
+    }
+
+    .article-info {
+        padding: 20px 30px 20px 40px;
+    }
+
+    .article-info .article-title {
+        margin-bottom: 10px;
+    }
+
+    .article-info .article-title > a {
+        color: #545454;
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+
+/* footer part */
+
+footer {
+    display: flex;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    background-color: #78afbd;
+    color: #fff;
+    padding: 60px;
+}
+
+footer .heading {
+    margin-right: 40px;
+}
+
+footer .icons a {
+    margin-right: 1em;
+}
+
+footer img {
+    width: 1.7em;
+}
+
+footer .login {
+    margin-left: auto;
+}
+
+@media (max-width: 992px) {
+    footer h1 {
+        font-size: 38px;
+    }
+    footer {
+        height: 160px;
+    }
+}
