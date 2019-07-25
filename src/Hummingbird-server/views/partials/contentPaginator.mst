@@ -1,0 +1,25 @@
+{{!
+  items: [{
+      pageNumber: number,
+      isActive: boolean,
+      href: string
+  }]
+
+  previousHref: string | null
+  nextHref: string | null
+}}
+<ul class="pagination content-paginator">
+  <li class="page-item {{^previousHref}}disabled{{/previousHref}}">
+    <a class="page-link" href="{{previousHref}}">Previous</a>
+  </li>
+
+  {{# items}}
+  <li class="page-item {{#isActive}}active{{/isActive}}">
+    <a class="page-link" href="{{href}}">{{pageNumber}}</a>
+  </li>
+  {{/ items}}
+
+  <li class="page-item {{^nextHref}}disabled{{/nextHref}}">
+    <a class="page-link" href="{{nextHref}}">Next</a>
+  </li>
+</ul>

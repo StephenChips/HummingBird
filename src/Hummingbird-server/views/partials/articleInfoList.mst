@@ -1,22 +1,23 @@
-{{! This template expects following data in your view data object:
-  1. articleInfoList: List of {
+{{!
+  articleInfoList: [{
     category: { href: string, title: string },
     href: string,
     title: string,
     publishDate: string
-  }
+  }]
 }}
 
-<section class="article-lists">
+<section class="article-info-list">
   {{#articleInfoList}}
-    <div class="article-info">
-      {{#category}}
-      <div class="article-category">Category: <a href="{{href}}">{{title}}</a></div>
-      {{/category}}
-      <div class="article-title"><a href="{{href}}">{{title}}</a></div>
-      <div class="article-publish-date">
-        Publish in {{publishDate}}
-      </div>
+  <div class="article-info">
+    {{#category}}
+    <div class="article-category">Category: <a href="{{href}}">{{title}}</a></div>
+    {{/category}}
+    <div class="article-title"><a href="{{href}}">{{title}}</a></div>
+    <div class="article-publish-date">
+      Publish in {{publishDate}}
     </div>
+  </div>
   {{/articleInfoList}}
+  
 </section>

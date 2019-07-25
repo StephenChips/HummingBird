@@ -316,11 +316,11 @@ router.get('/sections/:sectionId/categories', function (request, response) {
       categoryListPageUrl: `/sections/${request.params['sectionId']}/categories`
     },
     categoryInfoList: [
-      { href: '/category/As-Far-As-You-Can', title: 'As far As You Can' },
-      { href: '/category/As-Far-As-I-Can', title: 'As far As I Can' },
-      { href: '/category/As-Far-As-He-Can', title: 'As far As He Can' },
-      { href: '/category/As-Far-As-She-Can', title: 'As far As She Can' },
-      { href: '/category/As-Far-As-It-Can', title: 'As far As It Can' },
+      { href: `/sections/${request.params['sectionId']}/articles/?categoryId=As-Far-As-You-Can`, title: 'As far As You Can' },
+      { href: `/sections/${request.params['sectionId']}/articles/?categoryId=As-Far-As-I-Can`, title: 'As far As I Can' },
+      { href: `/sections/${request.params['sectionId']}/articles/?categoryId=As-Far-As-He-Can`, title: 'As far As He Can' },
+      { href: `/sections/${request.params['sectionId']}/articles/?categoryId=As-Far-As-She-Can`, title: 'As far As She Can' },
+      { href: `/sections/${request.params['sectionId']}/articles/?categoryId=As-Far-As-It-Can`, title: 'As far As It Can' },
     ],
     paginator: {
       items: [

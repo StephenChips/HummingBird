@@ -1,0 +1,12 @@
+{{!
+  showArticle: boolean
+  showCategory: boolean
+  articleListPageUrl: string
+  categoryListPageUrl: string
+}}
+
+<h1 class="section-page-content-nav-bar">
+  <a class="{{# showArticle}}active{{/ showArticle}}" href="{{articleListPageUrl}}">Articles</a>
+  <span>/</span>
+  <a class="{{# showCategory}}active{{/ showCategory}}" href="{{categoryListPageUrl}}">Categories</a>
+</h1>

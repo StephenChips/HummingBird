@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="content">
-      <h3><a href="/home">&lt;</a></h3>
+      <h3><a href="/">&lt;</a></h3>
       <h1 class="display-3 heading">
         HummingBird<br>blog
       </h1>
@@ -21,7 +21,7 @@
           <label for="login-password">Password</label>
           <input type="password" placeholder="Password" class="form-control" id="login-password">
         </div>
-        <button type="submit" class="btn btn-primary">Login </button>
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
   </body>

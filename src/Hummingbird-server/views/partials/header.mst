@@ -1,8 +1,7 @@
 {{!
-  Data:
-  1. sectionsInNavBar: List { title: string, href: string }
-  2. sectionsInDropdownMenu List { title: string, herf: string },
-  3. currentActiveSection: { title: string, herf: string }
+  sectionsInNavBar: [{ title: string, href: string }]
+  sectionsInDropdownMenu [{ title: string, herf: string }],
+  currentActiveSection: { title: string, herf: string }
 }}
 
 <header>

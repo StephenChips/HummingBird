@@ -1,34 +1,15 @@
 {{! This template expects following data in your view data object:
 
-  1. title: string
+  title: string,
 
-  2. header: {
-    sectionsInNavBar: List of { title: string, href: string }
-    sectionsInDropdownMenu List { title: string, herf: string },
-    currentActiveSection: { title: string, herf: string }
-  }
+  header: { ...header },
 
-  3. contentHeader: {
-    showArticle: boolean
-    showCategory: boolean
-  }
+  contentNavBar: { ...sectionPageContentNavBar },
 
-  4. categoryInfoList: List of {
-    { href: string, title: string },
-  }
+  categoryInfoList: [ ...categoryInfoList ],
 
-  5. paginator: {
-    paginatorItemList: List of {
-      pageNumber: number, href: string, isActive: boolean
-    }
-
-    disabledButtonPreviousClass: "disabled" | ""
-    disabledButtonNextClass: "disabled" | ""
-    previousHref: string
-    nextHref: string
-
-    paginatorSizeClass: "pagination-lg" | "pagination-sm" | ""
-  }
+  paginator: { ...contentPaginator }
+  
 }}
 <!DOCTYPE html>
 <html>
@@ -36,16 +17,20 @@
     <title>{{title}}</title>
     {{> commonMetas}}
     {{> commonStyles}}
-    <link rel="stylesheet" href="/assets/stylesheets/sections.css">
+    <link rel="stylesheet" href="/assets/stylesheets/header.css">
+    <link rel="stylesheet" href="/assets/stylesheets/footer.css">
+    <link rel="stylesheet" href="/assets/stylesheets/sectionPageContentNavBar.css">
+    <link rel="stylesheet" href="/assets/stylesheets/contentPaginator.css">
+    <link rel="stylesheet" href="/assets/stylesheets/categories.css">
   </head>
   <body>
     {{# header}}{{> header}}{{/ header}}
 
     <main>
       <div class="container">
-        {{# contentHeader}}{{> contentHeader}}{{/ contentHeader}}
+        {{# contentHeader}}{{> sectionPageContentNavBar}}{{/ contentHeader}}
         {{> categoryInfoList}}
-        {{# paginator}}{{> paginator}}{{/ paginator}}
+        {{# paginator}}{{> contentPaginator}}{{/ paginator}}
       </div>
     </main>
 
@@ -53,5 +38,4 @@
   </body>
 
   {{> commonScripts}}
-  <script src="/assets/javascripts/sections.js" type="text/javascript"></script>
 </html>

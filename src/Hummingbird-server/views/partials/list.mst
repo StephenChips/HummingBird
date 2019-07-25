@@ -1,8 +1,0 @@
-<ul>
-{{#items}}
-  <li>
-    {{value}}
-    {{> list}}
-  </li>
-{{/items}}
-</ul>

@@ -1,3 +1,14 @@
+{{!
+    backLinkUrl: string,
+
+    category: { title: string, href: string },
+
+    title: string,
+
+    publishDate: string,
+
+    content: string,
+}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -6,9 +17,9 @@
     <link rel="stylesheet" href="/assets/stylesheets/article.css">
   </head>
   <body>
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-      <a class="navbar-brand" href="#">Hummingbird Blog Articles</a>
-      <a class="btn btn-outline-primary" href="#">Back</a>
+    <nav class="navbar navbar-light">
+      <a class="navbar-brand text-white" href="/">Hummingbird Blog Articles</a>
+      <a class="btn btn-info" href="{{backLinkUrl}}">Back</a>
     </nav>
     <div class="container">
       <div class="article-heading my-4">
@@ -17,7 +28,7 @@
         <div>{{publishDate}}</div>
       </div>
       <article>
-        {{content}}
+        {{{content}}}
       </article>
     </div>
   </body>

@@ -2,36 +2,13 @@
 
   1. title: string
 
-  2. header: {
-    sectionsInNavBar: List of { title: string, href: string }
-    sectionsInDropdownMenu List { title: string, herf: string },
-    currentActiveSection: { title: string, herf: string }
-  }
+  2. header: { ...header }
 
-  3. contentHeader: {
-    showArticle: boolean
-    showCategory: boolean
-  }
+  3. contentHeader: { ...contentHeader }
 
-  4. articleInfoList: List of {
-    category: { href: string, title: string },
-    href: string,
-    title: string,
-    publishDate: string
-  }
+  4. articleInfoList: [{ ...articleInfoList }]
 
-  5. paginator: {
-    paginatorItemList: List of {
-      pageNumber: number, href: string, isActive: boolean
-    }
-
-    disabledButtonPreviousClass: "disabled" | ""
-    disabledButtonNextClass: "disabled" | ""
-    previousHref: string
-    nextHref: string
-
-    paginatorSizeClass: "pagination-lg" | "pagination-sm" | ""
-  }
+  5. paginator: { ...contentPaginator }
 }}
 <!DOCTYPE html>
 <html>
@@ -39,22 +16,23 @@
     <title>{{title}}</title>
     {{> commonMetas}}
     {{> commonStyles}}
-    <link rel="stylesheet" href="/assets/stylesheets/sections.css">
+    <link rel="stylesheet" href="/assets/stylesheets/header.css">
+    <link rel="stylesheet" href="/assets/stylesheets/sectionPageContentNavBar.css">
+    <link rel="stylesheet" href="/assets/stylesheets/articleInfoList.css">
+    <link rel="stylesheet" href="/assets/stylesheets/contentPaginator.css">
+    <link rel="stylesheet" href="/assets/stylesheets/footer.css">
   </head>
   <body>
     {{# header}}{{> header}}{{/ header}}
 
-    <main>
-      <div class="container">
-        {{# contentHeader}}{{> contentHeader}}{{/ contentHeader}}
-        {{> articleInfoList}}
-        {{# paginator}}{{> paginator}}{{/ paginator}}
-      </div>
+    <main class="container">
+      {{# contentHeader}}{{> sectionPageContentNavBar}}{{/ contentHeader}}
+      {{> articleInfoList}}
+      {{# paginator}}{{> contentPaginator}}{{/ paginator}}
     </main>
 
     {{> footer}}
   </body>
 
   {{> commonScripts}}
-  <script src="/assets/javascripts/sections.js" type="text/javascript"></script>
 </html>

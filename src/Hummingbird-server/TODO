@@ -20,10 +20,10 @@
         5. the header list will return what it look when user cancel the action.
 
 
-!!! Seperate the files
-1. Footer
-2. Header
-3. ContentHeader
-4. Paginator
-5. ArticleInfo
-6. CategoryList
+!!! Seperate the CSS
+!!! Create fake backend template data generator (async)
+
+website header √
+article list 
+category list
+paginator
