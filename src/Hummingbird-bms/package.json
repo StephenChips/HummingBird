@@ -1,0 +1,27 @@
+{
+  "name": "hummingbird-bms",
+  "version": "0.1.0",
+  "description": "Hummingbird's Blog Management System",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run clean && npx webpack --config ./webpack.config.js",
+    "clean": "rimraf ./dist"
+  },
+  "author": "StephenChips",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "css-loader": "^3.1.0",
+    "html-webpack-plugin": "^4.0.0-beta.8",
+    "style-loader": "^0.23.1",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  }
+}
