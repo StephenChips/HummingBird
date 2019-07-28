@@ -1,6 +1,15 @@
-import Vue from 'vue';
-import App from '@pages/App.vue';
+import Resource from './resources/define-resource';
 
-export default new Vue ({
-    render: createElement => createElement(App)
-}).$mount('#app');
+Resource.define('player');
+
+var query = Resource.select('player')
+  .where({
+      id: ['ehllo', 'world']
+  })
+  .result({
+      fields: ['foo', 'bar'],
+      range: [0, 14]
+  });
+
+
+query.send();

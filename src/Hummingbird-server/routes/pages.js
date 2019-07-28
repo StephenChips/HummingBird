@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var path = require('path');
 
 router.get(['/', '/home'], function (request, response) {
   response.render('home', {
@@ -364,6 +365,10 @@ router.get('/articles/:articleId', function (request, response) {
 
 router.get('/login', function (req, res) {
   res.render('login');
+});
+
+router.get('/bms', function (req, res) {
+  res.sendFile(path.resolve(process.cwd(), './views/spa/bms.html'));
 });
 
 module.exports = router;

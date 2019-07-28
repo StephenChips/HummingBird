@@ -6,16 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run clean && npx webpack --config ./webpack.config.js",
+    "deploy": "node deploy",
     "clean": "rimraf ./dist"
   },
   "author": "StephenChips",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "axios": "^0.19.0",
     "lodash": "^4.17.15",
+    "ncp": "^2.0.0",
+    "qs": "^6.7.0",
+    "url-join": "^4.0.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {
     "babel": "^6.23.0",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.1.0",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "style-loader": "^0.23.1",

@@ -11,6 +11,8 @@
 
 import { debounce } from 'lodash';
 
+import App from '../components/'
+
 export default {
     props: {
         'start': {
