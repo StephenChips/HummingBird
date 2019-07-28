@@ -46,5 +46,5 @@ app.use(function(err, req, res, next) {
 const PORT = 8080;
 
 app.listen(PORT, () => {
-    console.log('Server started at port ' + PORT + '.');
+  console.log('Server started at port ' + PORT + '.');
 });

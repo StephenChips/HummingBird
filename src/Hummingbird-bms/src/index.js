@@ -1,15 +1,14 @@
-import Resource from './resources/define-resource';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
 
-Resource.define('player');
+import App from '@pages/App.vue';
+import routes from './routes';
 
-var query = Resource.select('player')
-  .where({
-      id: ['ehllo', 'world']
-  })
-  .result({
-      fields: ['foo', 'bar'],
-      range: [0, 14]
-  });
+Vue.use(BootstrapVue);
+Vue.use(VueRouter);
 
-
-query.send();
+export default new Vue({
+  render: h => h(App),
+  router: new VueRouter({ routes })
+}).$mount('#app');

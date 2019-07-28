@@ -1,7 +1,6 @@
 const path = require('path');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     mode: 'development',
@@ -40,10 +39,6 @@ module.exports = {
             filename: 'index.html',
             template: './src/index.html'
         }),
-        new CopyWebpackPlugin([
-            { from: './javascript', to: '../hummingbird-server/public/javascripts' },
-            { from: './index.html', to: '../hummingbird-server/public/htmls/hummingbird-bms' }
-        ]),
         new VueLoaderPlugin()
     ],
 

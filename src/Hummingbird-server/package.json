@@ -14,5 +14,8 @@
     "morgan": "~1.9.1",
     "mustache": "^3.0.1",
     "mustache-express": "^1.2.8"
+  },
+  "devDependencies": {
+    "mini-css-extract-plugin": "^0.8.0"
   }
 }

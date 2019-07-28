@@ -1,16 +1,18 @@
 <template>
 <div>
-    <h1>Counter</h1>
-    <Counter :start=0 :step=2></Counter>
+    <bms-header></bms-header>
+    <div>
+        <router-view></router-view>
+    </div>
 </div>
 </template>
 
 <script>
-import Counter from '@components/Counter.vue';
+import BmsHeader from '@components/BmsHeader.vue';
 
 export default {
     name: 'App',
-    components: { Counter }
+    components: { BmsHeader }
 }
 </script>
 <style>
