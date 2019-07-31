@@ -1,6 +1,6 @@
 <template>
 <div>
-    <bms-header></bms-header>
+    <BMSHeader />
     <div>
         <router-view></router-view>
     </div>
@@ -8,16 +8,15 @@
 </template>
 
 <script>
-import BmsHeader from '@components/BmsHeader.vue';
+import BMSHeader from '@components/BMSHeader.vue';
 
 export default {
     name: 'App',
-    components: { BmsHeader }
+    components: { BMSHeader }
 }
 </script>
-<style>
-.counter {
-    width: 300px;
-    
+<style scoped>
+body {
+    background: #fdfdfd;
 }
 </style>

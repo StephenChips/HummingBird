@@ -17,9 +17,7 @@
 
 <script>
 export default {
-    name: 'bms-header',
-
-
+    name: 'bms-header'
 }
 </script>
 
