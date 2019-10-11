@@ -91,3 +91,13 @@ class ResourceError {
     reason: string, 
     httpCode: number
 }
+
+{
+    where: {
+        sectionId: section,
+        categoryId: category,
+    },
+    returns: {
+        range: [0, 30]
+    }
+}
