@@ -7,16 +7,16 @@ var ProductionServer = notImplementedYet('production server');
 var PORT = 8080;
 
 try {
-    options.setupAndFreeze();
+    options.setup();
 } catch (e) {
     console.log(e.message);
-   process.exit(1);
+    process.exit(1);
 }
 
 var app;
 
 if (options.runningMode == 'mock') {
-  // enable mock server
+    // enable mock server
     app = MockServer();
 } else if (options.runningMode == 'development') {
     app = DevelopmentServer();

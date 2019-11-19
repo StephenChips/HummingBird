@@ -8,12 +8,12 @@ var options = {
             var name = args[0];
             if (name == '-m' || name == '--mode') {
                 this.runningMode = parseRunningMode(args);
-            } else {
+            }  else {
                 throw new Error(`Error: unknown command line option ${optionName}.`);
             }
         }
     },
-    setupAndFreeze () {
+    setup () {
         this.setDefault();
         this.setFromCommandLine();
         Object.freeze(this);

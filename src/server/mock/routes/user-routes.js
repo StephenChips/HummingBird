@@ -1,12 +1,18 @@
 var express = require('express');
-var userRoutes = express.Router('/users');
+var generate = require('../generate');
 
-userRoutes.get('/:userId', function (req, res) {
-    res.send(MOCK_USER);
+var userRoutes = express.Router();
+
+userRoutes.get('/:userID', function (req, res) {
+    if (req.accepts('text/json')) {
+        res.send(generate.oneUser());
+    } else {
+        throw new httpErrors.NotAcceptable();
+    }
 });
 
-userRoutes.patch('/users', function (req, res) {
-
+userRoutes.patch('/:userID', function (req, res) {
+    res.send();
 });
 
 module.exports = {
