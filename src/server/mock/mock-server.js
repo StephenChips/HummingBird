@@ -1,9 +1,11 @@
 var fs = require('fs');
 var path = require('path');
+
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var httpErrors = require('http-errors');
 var morgan = require('morgan'); // HTTP request logger
+var ejs = require('ejs');
 
 var ROUTES_PATH = './routes';
 var STATIC_FILES_SERVER_PATH = './public'; // the path in which static files actually be stored.
@@ -13,6 +15,7 @@ function startMockServer () {
     var app = express();
     enableUtilities(app);
     setupStaticRouter(app);
+    setupViewEngine(app);
     setupRouters(app);
     setUpNotFoundHandler(app);
     setUpErrorHandler(app);
@@ -31,6 +34,11 @@ function setupStaticRouter(app) {
     app.get('/favicon.ico', function (req, res) {
         res.redirect(301, '/public/images/favicon.ico');
     });
+}
+
+function setupViewEngine (app) {
+    app.set('views', path.resolve(process.cwd(), './views'));
+    app.set('view engine', 'ejs');
 }
 
 function setupRouters (app) {
