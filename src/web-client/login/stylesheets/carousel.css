@@ -1,0 +1,19 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel > .carousel-scroll {
+    position: absolute;
+    transition: transform 500ms;
+}
+
+.carousel > .carousel-scroll > .carousel-slide {
+    float: left;
+    transition: opacity 150ms;
+    opacity: 0;
+}
+
+.carousel > .carousel-scroll > .carousel-slide.show {
+    opacity: 1;
+}

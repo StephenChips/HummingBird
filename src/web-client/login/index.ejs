@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Document</title>
+</head>
+<body class="hide">
+  <main>
+    <h1 class="page-title">
+      蜂鸟博客
+    </h1>
+    <div id="login-hint" class="carousel">
+      <div class="carousel-scroll">
+        <div class="carousel-slide login-hint">
+          请登录
+        </div>
+        <div class="carousel-slide login-hint">
+          登录成功
+        </div>
+      </div>
+    </div>
+    <form id="login-form">
+      <div class="form-section">
+        <div class="form-input username">
+          <label for="form-input-username">用户名</label>
+          <input type="text" id="form-input-username">
+          <div class="incorrect-prompt"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-input password">
+          <label for="form-input-password">密码</label>
+          <input type="password" id="form-input-password">
+          <div class="incorrect-prompt"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-submit">
+          <button id="submit" type="button" class="form-button-confirm" title="确认登录信息并登录">确认</button>
+          <button id="cancel" type="button" class="form-button-cancel" title="返回上一页">返回</button>
+        </div>
+      </div>
+    </form>
+    <small id="powered-by">
+      <div>由蜂鸟博客系统搭建</div>
+      <div>Powered By Hummingbird Blog System</div>
+    </small>
+  </main>
+</body>
+</html>
