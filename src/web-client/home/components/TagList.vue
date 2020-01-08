@@ -10,7 +10,7 @@
         </div>
     </transition>
 
-    <h1 class="taglist-title">文章标签列表</h1>
+    <h1 class="taglist-title" :style="taglistTitleStyle">文章标签列表</h1>
 
     <!-- 标签 -->
     <ul class="plain">
@@ -20,66 +20,48 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+import request from '../src/request';
+
 export default {
     name: 'TagList',
 
+    props: [ 'sectionID', 'tagID' ],
+    
     data () {
         return {
-            tagList: [
-                { url: '/life/中文', name: '中文' },
-                { url: '/life/旅游', name: '旅游' },
-                { url: '/tech/前端', name: '前端' },
-                { url: '/tech/后端', name: '后端' }
-            ],
-
-            currentSection: undefined,
-            currentTag: undefined
+            tagList: []
         };
     },
 
-    mounted () {
-        var tagUrl = this.$route.params.tag;
-        this.currentSection = this.$route.params.section;
-        this.currentTag = this.tagList.find(tag => tag.url == tagUrl);
+    created () {
+        request.getTags(this.sectionID).then(tagList => {
+            this.tagList = tagList;
+        });
     },
 
     methods: {
-        addMarginFortaglistTitle () {
-            var taglistTitle = this.$el.querySelector('.taglist-title');
-            taglistTitle.style.marginTop = '100px';
-        },
-
-        removeMarginFortaglistTitle () {
-            var taglistTitle = this.$el.querySelector('.taglist-title');
-            taglistTitle.style.marginTop = '';
-        },
-
         selectTag (tag) {
-            if (this.currentTag !== tag) {
-                this.currentTag = tag;
+            if (this.currentTag === undefined || tag.id !== this.currentTag.id) {
                 this.$router.push(tag.url);
             }
         },
 
         deselectTag () {
-            this.currentTag = undefined;
-            this.$router.push(`/${this.currentSection}`);
+            this.$router.push(this.currentSection.url);
         }
     },
 
-    watch: {
-        $route (to, from) {
-            this.currentSection = this.$route.params.section;
-            this.currentTag = this.tagList.find(tag => tag.url == to.path);
+    computed: {
+        taglistTitleStyle () {
+            return {
+                marginTop: this.currentTag ? '100px' : '0'
+            };
         },
-
-        currentTag (newTag, oldTag) {
-            if (!oldTag && newTag) {
-                this.addMarginFortaglistTitle();
-            } else if (oldTag && !newTag) {
-                this.removeMarginFortaglistTitle();
-            }
-        }
+        ...mapState({
+            currentSection: state => state.app.currentSection,
+            currentTag: state => state.sectionPage.currentTag,
+        })
     }
 }
 </script>
