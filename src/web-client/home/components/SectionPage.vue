@@ -1,7 +1,8 @@
 <template>
 <div class="section-page">
     <section class="content">
-        <h1>{{ currentSection.name }}</h1>
+        <h1 v-if="currentTag">文章系列：“{{ currentTag.name }}”</h1>
+        <h1 v-else>所有文章</h1>
         <router-view></router-view>
     </section>
     <TagList
@@ -35,7 +36,7 @@ export default {
 
     computed: {
         ...mapState({
-            currentSection: state => state.app.currentSection
+            currentTag: state => state.sectionPage.currentTag
         })
     },
 

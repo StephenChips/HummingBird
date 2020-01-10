@@ -1,15 +1,18 @@
 import request from '../request';
 
-export const MAX_ARTICLE_NUMBER_PER_PAGE = 20;
+export const MAX_ARTICLE_NUMBER_PER_PAGE = 15;
 
 export default {
     namespaced: true,
 
     state: {
         currentTag: null, 
-        editable: false,
+        editable: true,
         currentPage: 0,
+        totalPageCount: 0,
         articleList: [],
+
+        selectedArticles: []
     },
     
     mutations: {
@@ -29,11 +32,20 @@ export default {
             state.articleList = articleList;
         },
 
-        selectArticle (state, { article, selected }) {
-            var index = state.articleList.findIndex(a => a === article);
-            if (index !== -1) {
-                state.articleList[index].selected = selected;
+        selectArticle (state, { articleURL, selected }) {
+            var index = state.selectedArticles.findIndex(url => url === articleURL);
+
+            if (selected && index === -1) {
+                state.selectedArticles.push(articleURL);
+            } else if (!selected && index !== -1) {
+                state.selectedArticles.splice(index, 1);
             }
+
+            console.log(state.selectedArticles);
+        },
+
+        clearArticleSelection (state) {
+            state.selectedArticles = [];
         },
 
         removeSelectedArticle(state, { selected }) {
@@ -41,6 +53,10 @@ export default {
             if (index !== -1) {
                 state.selectedArticles.splice(index, 1);
             }
+        },
+
+        setTotalPageCount(state, { totalPageCount }) {
+            state.totalPageCount = totalPageCount;
         }
     },
 
@@ -52,9 +68,12 @@ export default {
         },
 
         loadArticles({ commit, state, rootState }, payload) {
-            var sectionID = rootState.app.currentSection.id;
-            var tagID = state.currentTag.id;
-            var page;
+            var page, tagID, sectionID;
+            
+            sectionID = rootState.app.currentSection.id;
+            if (state.currentTag !== undefined) {
+                tagID = state.currentTag.id;
+            }
             
             if (payload !== undefined && payload.page !== undefined) {
                 page = payload.page;
@@ -62,23 +81,34 @@ export default {
                 page = 1;
             }
 
-            console.log('[sectonID, tagID]: ', sectionID, tagID)
-
             var start = MAX_ARTICLE_NUMBER_PER_PAGE * (page - 1);
             var end = MAX_ARTICLE_NUMBER_PER_PAGE * page - 1;
 
             return request.getArticles(sectionID, tagID, [ start, end ])
-                .then(articleList => articleList.map(article => ({ selected: false, ...article })))
                 .then(articleList => {
                     commit('setArticleList', { articleList });
                     commit('setCurrentPage', { currentPage: page });
                 });
         },
 
-        removeAllSelectedArticle({ state }) {
-            var selected = state.articleList.filter(article => article.selected);
-            return request.removeArticles(selected).then(({ count }) => {
-                console.log('removed ' + count + ' articles.');
+        loadTotalPageCount({ commit, state, rootState }) {
+            var sectionID, tagID;
+
+            sectionID = rootState.app.currentSection.id;
+            
+            if (state.currentTag) {
+                tagID = state.currentTag.id;
+            }
+
+            request.getArticleCount(sectionID, tagID).then(count => {
+                commit('setTotalPageCount', { totalPageCount: Math.ceil(count / MAX_ARTICLE_NUMBER_PER_PAGE) });
+            });
+        },
+
+        removeAllSelectedArticle({ state, dispatch, commit }) {
+            return request.removeArticles.apply(request, state.selectedArticles).then(() => {
+                commit('clearArticleSelection');
+                dispatch('loadArticles', { page: state.currentPage });
             });
         }
     }

@@ -31,24 +31,25 @@
 </template>
 
 <script>
+import request from '../src/request';
+
 export default {
     name: 'Home',
 
-    mounted () {
-        this.techArticles = this.loadArticle('tech');
-        this.techArticles = this.loadArticle('life');
-    },
-
-    methods: {
-        loadArticle (section) {
-            return []
-        }
+    created () {
+        this.$store.dispatch('app/loadCurrentSectionInfo', { sectionID: 'home' });
+        request.getArticles('life', undefined, [0, 15]).then(articles => {
+            this.lifeArticles = articles;
+        });
+        request.getArticles('tech', undefined, [0, 15]).then(articles => {
+            this.techArticles = articles;
+        });
     },
 
     data () {
         return {
-            techArticles: undefined,
-            lifeArticles: undefined
+            techArticles: [],
+            lifeArticles: []
         }
     }
 }

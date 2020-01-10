@@ -2,7 +2,7 @@
 <div class="taglist">
     <transition name="fade">
         <div class="current-tag" v-if="currentTag">
-            <div class="header heading">当前选中标签</div>
+            <div class="header heading">当前选中的文章系列</div>
             <div class="content">
                 <div>{{ currentTag.name }}</div>
                 <button @click="deselectTag"><span class="material-icons">close</span></button>
@@ -10,7 +10,7 @@
         </div>
     </transition>
 
-    <h1 class="taglist-title" :style="taglistTitleStyle">文章标签列表</h1>
+    <h1 class="taglist-title" :style="taglistTitleStyle">所有文章系列</h1>
 
     <!-- 标签 -->
     <ul class="plain">

@@ -2,53 +2,43 @@
 <div class="navigation">
     <ul class="plain section-list">
         <li v-for="section of sections" :key="section.url" class="f-small section-link">
-            <a href="#" :class="{ plain: true, current: section == currentSection }" @click.prevent="gotoSection(section)">{{ section.title }}</a>
+            <a href="#" :class="{ plain: true, current: section.id == currentSection.id }" @click.prevent="gotoSection(section)">{{ section.name }}</a>
         </li>
     </ul>
 </div>
 </template>
 
 <script>
+import request from '../src/request';
+import { mapState } from 'vuex';
+
 export default {
     name: 'Navigation',
 
-    mounted () {
-        this.sections = this.loadSection();
-        this.currentSection = this.sections.find(section => section.url === this.$route.path);
+    created () {
+        request.getSections('/', '/tech', '/life').then(sections => {
+            this.sections = sections;
+        })
     },
 
     data () {
         return {
-            currentSection: undefined,
-            sections: undefined
+            sections: []
         };
     },
 
     methods: {
-        loadSection () {
-            return [
-                {
-                    url: '/',
-                    title: '主页'
-                },
-                {
-                    url: '/tech',
-                    title: '技术区'
-                },
-                {
-                    url: '/life',
-                    title: '生活区'
-                }
-            ];
-        },
-
         gotoSection (section) {
             if (this.currentSection !== section) {
-                this.currentSection = section;
                 this.$router.push(section.url);
             }
-
         }
+    },
+
+    computed: {
+        ...mapState({
+            currentSection: state => state.app.currentSection
+        })
     }
 }
 </script>
