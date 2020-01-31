@@ -1,0 +1,123 @@
+/*
+Created Time: 2020/1/1 - 0:08
+Author: StephenChips
+
+This file add more general css rules base on the file 'normalize.css',
+which might override curtain rules.
+*/
+
+html {
+    font-size: 16px; /* size of regular font  */
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+body {
+    line-height: 1.5;
+    min-height: 980px;
+}
+
+a {
+    color: #343434;
+}
+
+a.plain,
+a:not([href]) {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul.plain,
+ol.plain {
+    list-style-type: none;
+    padding: 0;
+}
+
+code, pre {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.f-small {
+    font-size: 14px;
+}
+
+.f-large {
+    font-size: 18px;
+}
+
+.f-xs {
+    font-size: 12px;
+}
+
+.f-s {
+    font-size: 14px;
+}
+
+.f-b {
+    font-size: 16px;
+}
+
+.f-l {
+    font-size: 18px;
+}
+
+.f-xl {
+    font-size: 20px;
+}
+
+.f-display-1 {
+    font-size: 26px;
+}
+
+.f-display-2 {
+    font-size: 28px;
+}
+
+.f-display-3 {
+    font-size: 30px;
+}
+
+input {
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 3px 0;
+    margin: 0;
+    border: none;
+    border-bottom: 1px #D4D4D4 solid;
+    transition: border 0.5s;
+}
+
+input:focus {
+    border-bottom-color: #343434;
+    outline: none;
+}
+
+input.incorrect {
+    border-bottom-color: #960000;
+}
+
+button {
+    font-size: 14px;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+button.primary {
+    background: #232323;
+    color: white;
+}
+
+button.secondary {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+button.disabled {
+    background: white;
+    color: #D4D4D4;
+    border: 1px solid #D4D4D4;
+}

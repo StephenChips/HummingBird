@@ -4,11 +4,14 @@
   "description": "Web Client for Hummingbird Blog System",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --env.development"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.6.4",
+    "element-ui": "^2.13.0",
     "escape-html": "^1.0.3",
     "events": "^3.0.0",
     "faker": "^4.1.0",
@@ -18,18 +21,22 @@
     "mem": "^4.3.0",
     "npm": "^6.13.4",
     "vue": "^2.6.11",
+    "vue-notifications": "^1.0.2",
     "vue-router": "^3.1.3",
     "vuejs-paginate": "^2.1.0",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.8.3",
     "@types/escape-html": "0.0.20",
     "@types/events": "^3.0.0",
     "@types/jquery": "^3.3.31",
     "@types/node": "^12.12.22",
     "babel-loader": "^8.0.6",
+    "babel-plugin-component": "^1.1.1",
     "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.0",
     "css-loader": "^3.4.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
@@ -40,6 +47,7 @@
     "vue-loader": "^15.8.3",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
   }
