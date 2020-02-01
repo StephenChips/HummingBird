@@ -9,6 +9,8 @@ import ArticlesFilteredByTag from '../components/ArticlesFilteredByTag.vue';
 import SearchPage from '../components/SearchPage.vue';
 import NavigationView from '../components/NavigationView.vue';
 import ArticlePage from '../components/ArticlePage.vue';
+import SettingPage from '../components/setting/SettingPage.vue';
+import AccountSetting from '../components/setting/AccountSetting.vue';
 
 var routes = [
     {
@@ -18,6 +20,17 @@ var routes = [
     {
         path: '/articles/:articleID',
         component: ArticlePage
+    },
+    {
+        path: '/settings',
+        component: SettingPage,
+        redirect: '/settings/account',
+        children: [
+            {
+                path: 'account',
+                component: AccountSetting
+            }
+        ]
     },
     {
         path: '/',

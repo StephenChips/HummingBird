@@ -1,6 +1,6 @@
 <template>
 <div class="website-title" :class="[titleSize]" @resize="recordElWidth">
-    <div class="website-title-wrapper small heading" ref="website-title-wrapper">
+    <div class="heading" ref="website-title-wrapper">
         <router-link class="plain" to="/">蜂鸟博客</router-link>
     </div>
     <transition
@@ -9,11 +9,19 @@
         @leave="leave"
     >
         <div v-if="state === 'normal'" key="buttons" class="title-aux buttons">
-            <div class="login f-small">
-                <a href="#" v-if="hasLogin" class="plain" @click.stop="logout">登出</a>
-                <router-link v-else class="plain" to="/login">登录</router-link>
-            </div>
-            <div class="search f-small"><a class="plain" href="" @click.prevent="showSearchBox()">搜索</a></div>
+            <el-dropdown v-if="hasLogin">
+                <span class="el-dropdown-link">
+                    账号<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item @click="$router.push('/articles/new')">新建文章</el-dropdown-item>
+                    <el-dropdown-item @click="$router.push('/account/')">修改账号密码</el-dropdown-item>
+                    <el-dropdown-item @click="logout()">登出</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+            <el-button v-else type="text" @click.stop="$router.push('/login')">登录</el-button>
+
+            <el-button @click="showSearchBox()" type="text">搜索</el-button>
         </div>
         <form v-else-if="state === 'search'" key="searchbox" class="title-aux searchbox" ref="searchbox">
             <input type="text" placeholder="搜索文章" v-model="searchText" :style="searchBoxStyle" @keydown.enter="search"/>
@@ -32,6 +40,7 @@
 </template>
 
 <script>
+import { Message, Button, Dropdown, DropdownItem, DropdownMenu } from 'element-ui';
 import { mapState } from 'vuex';
 
 export default {
@@ -94,7 +103,7 @@ export default {
 
         search () {
             if (this.searchText === '') {
-                alert('不能搜索空字符串');
+                Message('搜索前，请先在搜索框中输入内容。');
             } else {
                 this.$router.push(`/search/?s=${encodeURIComponent(this.searchText)}`);
             }
@@ -128,7 +137,12 @@ export default {
         })
     },
 
-
+    components: {
+        'el-button': Button,
+        'el-dropdown': Dropdown,
+        'el-dropdown-menu': DropdownMenu,
+        'el-dropdown-item': DropdownItem
+    }
 }
 </script>
 
@@ -139,26 +153,15 @@ export default {
     border-bottom: 1px solid#D4D4D4;
     transition: font-size 0.5s, opacity 0.5s;
     position: relative;
-    font-weight: bold;
 }
 
-.website-title > .website-title-wrapper {
+.website-title > .heading {
     width: 4em;
     margin: 0 auto;
     white-space: nowrap;
     text-align: center;
-}
-
-.website-title > .website-title-wrapper {
-    transition: font-size 0.5s;
-}
-
-.website-title.large > .website-title-wrapper {
-    font-size: 3rem;
-}
-
-.website-title.small .website-title-wrapper {
     font-size: 2rem;
+    font-weight: bold;
 }
 
 .title-aux {
@@ -170,8 +173,23 @@ export default {
 }
 
 .title-aux.buttons > * {
-    display: flex;
     margin-left: 1em;
+}
+
+/** HACK */
+.title-aux.buttons > .el-button,
+.title-aux.buttons > .el-dropdown {
+    padding: 0;
+}
+
+.title-aux.buttons .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+    vertical-align: middle;
+}
+
+.title-aux.buttons .el-icon-arrow-down {
+    font-size: 12px;
 }
 
 .title-aux.buttons:last-child {
