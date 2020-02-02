@@ -7,10 +7,24 @@ import router from './router';
 import store from './store';
 
 import App from '@Components/App.vue';
+import { Auth } from "./auth";
 
 new Vue({
     el: '#app',
     render: h => h(App),
     router,
-    store
+    store,
+
+    created () {
+        this.initStore();
+    },
+
+    methods: {
+        initStore () {
+            var auth = new Auth();
+            if (auth.hasLogin) {
+                this.$store.commit('app/login');
+            }
+        }
+    }
 });

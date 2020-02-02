@@ -1,10 +1,10 @@
 <template>
 <div>
     <header>
-        <el-page-header @back="back" content="设置" />
+        <el-page-header @back="$router.go(-1)" content="设置" />
     </header>
     <main>
-        <el-menu :router="true">
+        <el-menu :router="true" :default-active="activedItemURL">
             <el-menu-item index="/settings/account">修改密码</el-menu-item>
         </el-menu>
         <div class="content">
@@ -16,10 +16,18 @@
 
 <script>
 import { PageHeader, Menu, MenuItem } from 'element-ui';
+import { SettingPages } from '../../src/store/settingPage';
+
 export default {
-    methods: {
-        back () {
-            console.log('click back button');
+    computed: {
+        activedItemURL () {
+            switch (this.$store.state.settingPage.activedPage) {
+                case SettingPages.ACCOUNT_CHANGE_PASSWORD:
+                    console.log('hello')
+                    return '/settings/account';
+                default:
+                    return '';
+            }
         }
     },
 

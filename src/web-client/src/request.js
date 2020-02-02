@@ -79,5 +79,9 @@ export default {
 
     getArticleCount(section, tags) {
         return Promise.resolve(ARTICLES.length);
+    },
+
+    updatePassword (password) {
+        return Promise.resolve();
     }
 };

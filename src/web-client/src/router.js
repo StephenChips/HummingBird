@@ -12,6 +12,8 @@ import ArticlePage from '../components/ArticlePage.vue';
 import SettingPage from '../components/setting/SettingPage.vue';
 import AccountSetting from '../components/setting/AccountSetting.vue';
 
+import { Auth } from './auth';
+
 var routes = [
     {
         path: '/login',
@@ -25,6 +27,9 @@ var routes = [
         path: '/settings',
         component: SettingPage,
         redirect: '/settings/account',
+        meta: {
+            requireLogin: true
+        },
         children: [
             {
                 path: 'account',
@@ -69,4 +74,19 @@ var routes = [
 
 Vue.use(VueRouter);
 
-export default new VueRouter({ routes });
+const router = new VueRouter({ routes });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requireLogin)) {
+        var auth = new Auth();
+        if (auth.hasLogin) {
+            next();
+        } else {
+            next('/login');
+        }
+    } else {
+        next();
+    }
+});
+
+export default router;

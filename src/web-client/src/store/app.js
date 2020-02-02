@@ -16,7 +16,6 @@ export default {
 
         login (state) {
             state.hasLogin = true;
-            console.log(state.hasLogin)
         },
 
         logout (state) {

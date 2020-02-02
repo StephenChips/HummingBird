@@ -9,14 +9,14 @@
         @leave="leave"
     >
         <div v-if="state === 'normal'" key="buttons" class="title-aux buttons">
-            <el-dropdown v-if="hasLogin">
+            <el-dropdown v-if="hasLogin" @command="handleDropdownCommands">
                 <span class="el-dropdown-link">
                     账号<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click="$router.push('/articles/new')">新建文章</el-dropdown-item>
-                    <el-dropdown-item @click="$router.push('/account/')">修改账号密码</el-dropdown-item>
-                    <el-dropdown-item @click="logout()">登出</el-dropdown-item>
+                    <el-dropdown-item command="NEW_ARTICLE">新建文章</el-dropdown-item>
+                    <el-dropdown-item command="SET_ACCOUNT">修改账号密码</el-dropdown-item>
+                    <el-dropdown-item command="LOGOUT">登出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
             <el-button v-else type="text" @click.stop="$router.push('/login')">登录</el-button>
@@ -59,6 +59,23 @@ export default {
     },
 
     methods: {
+        handleDropdownCommands (command) {
+            console.log(command)
+            switch (command) {
+                case 'NEW_ARTICLE':
+                    this.$router.push('/article/new');
+                    break;
+                case 'SET_ACCOUNT':
+                    this.$router.push('/settings/account');
+                    break;
+                case 'LOGOUT':
+                    this.$store.dispatch('app/logout');
+                    break;
+                default:
+                    break;
+            }
+        },
+
         recordElWidth () {
             this.elWidth = this.$el.offsetWidth;
         },
@@ -108,10 +125,6 @@ export default {
                 this.$router.push(`/search/?s=${encodeURIComponent(this.searchText)}`);
             }
         },
-
-        logout () {
-            this.$store.dispatch('app/logout');
-        }
     },
 
     computed: {
