@@ -1,43 +1,40 @@
 const express = require('express');
 const generate = require('../generate');
 
-var seriesRoutes = express.Router();
+var categoryRoutes = express.Router();
 
-seriesRoutes.post('/', function (req, res) {
+categoryRoutes.post('/', function (req, res) {
     res.send();
 });
 
-seriesRoutes.delete('/:seriesID', function (req, res) {
+categoryRoutes.delete('/:categoryID', function (req, res) {
     res.send();
 });
 
-seriesRoutes.patch('/:seriesID', function (req, res) {
+categoryRoutes.patch('/:categoryID', function (req, res) {
     res.send();
 });
 
-seriesRoutes.get('/:seriesID', function (req, res) {
+categoryRoutes.get('/:categoryID', function (req, res) {
     var acceptedType = req.accepts(['text/json', 'text/html']);
     if (acceptedType == 'text/html') {
         res.send('');
     } else if (acceptedType == 'text/json') {
-        res.send(generate.oneSeries());
+        res.send(generate.onecategory());
     } else {
         throw new httpErrors.NotAcceptable();
     }
 });
 
-seriesRoutes.get('/', function (req, res) {
+categoryRoutes.get('/', function (req, res) {
     var acceptedType = req.accepts(['text/json', 'text/html']);
     if (acceptedType == 'text/html') {
         res.send('');
     } else if (acceptedType == 'text/json') {
-        res.send(generate.multipleSeries());
+        res.send(generate.multiplecategory());
     } else {
         throw new httpErrors.NotAcceptable();
     }
 });
 
-module.exports = {
-    routes: seriesRoutes,
-    mountPath: '/series'
-};
+module.exports = categoryRoutes;

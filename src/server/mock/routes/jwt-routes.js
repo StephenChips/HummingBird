@@ -10,7 +10,4 @@ jwtRoutes.post('/', function (req, res) {
     }
 });
 
-module.exports = {
-    routes: jwtRoutes,
-    mountPath: '/jwt'
-};
+module.exports = jwtRoutes;

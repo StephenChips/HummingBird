@@ -15,7 +15,4 @@ userRoutes.patch('/:userID', function (req, res) {
     res.send();
 });
 
-module.exports = {
-    routes: userRoutes,
-    mountPath: '/users'
-};
+module.exports = userRoutes;

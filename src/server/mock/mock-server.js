@@ -5,19 +5,17 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var httpErrors = require('http-errors');
 var morgan = require('morgan'); // HTTP request logger
-var ejs = require('ejs');
 
-var ROUTES_PATH = './routes';
-var STATIC_FILES_SERVER_PATH = './public'; // the path in which static files actually be stored.
-var STATIC_FILE_PUBLIC_PATH = '/public'; // the path in which web client access the static files.
+var articleRoutes = require('./routes/article-rotues');
+var categoryRoutes = require('./routes/category-routes');
+var jwtRoutes = require('./routes/jwt-routes');
+var sectionRoutes = require('./routes/section-routes');
+var userRoutes = require('./routes/user-routes');
 
 function startMockServer () {
     var app = express();
     enableUtilities(app);
-    setupStaticRouter(app);
-    setupViewEngine(app);
-    setupRouters(app);
-    setUpNotFoundHandler(app);
+    setupRoutes(app);
     setUpErrorHandler(app);
     return app;
 }
@@ -29,36 +27,22 @@ function enableUtilities (app) {
     app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 }
 
-function setupStaticRouter(app) {
-    app.use(STATIC_FILE_PUBLIC_PATH, express.static(STATIC_FILES_SERVER_PATH));
-    app.get('/favicon.ico', function (req, res) {
-        res.redirect(301, '/public/images/favicon.ico');
-    });
-}
+function setupRoutes (app) {
+    var apiRouter = express.Router();
 
-function setupViewEngine (app) {
-    app.set('views', path.resolve(process.cwd(), './views'));
-    app.set('view engine', 'ejs');
-}
+    apiRouter.use('/articles', articleRoutes);
+    apiRouter.use('/categories', categoryRoutes);
+    apiRouter.use('/jwt', jwtRoutes);
+    apiRouter.use('/sections', sectionRoutes);
+    apiRouter.use('/users', userRoutes);
 
-function setupRouters (app) {
-    // load all routes in ./routes directory.
-    var filedir = path.join(__dirname, ROUTES_PATH);
-    var filenames = fs.readdirSync(filedir);
-    for (var name of filenames) {
-        var filePath = path.join(filedir, name);
-        var { mountPath, routes } = require(filePath);
-        app.use(mountPath, routes);
-    }
-}
-
-function setUpNotFoundHandler (app) {
-    app.use(function (req, res) {
-        throw new httpErrors.NotFound('Not Found');
-    })
+    app.use('/api', apiRouter);
 }
 
 function setUpErrorHandler (app) {
+    app.use(function (req, res) {
+        throw new httpErrors.NotFound('Not Found');
+    })
     app.use(function (err, req, res, next) {
         if (err.status == 500) {
             res.status(500).send();

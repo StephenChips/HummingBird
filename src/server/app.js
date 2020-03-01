@@ -4,7 +4,7 @@ var options = require('./options.js');
 var DevelopmentServer = notImplementedYet('development server');
 var ProductionServer = notImplementedYet('production server');
 
-var PORT = 8080;
+var PORT = 3000;
 
 try {
     options.setup();

@@ -37,7 +37,4 @@ sectionRoutes.get('/', function (req, res) {
     }
 });
 
-module.exports = {
-    routes: sectionRoutes,
-    mountPath: '/sections'
-};
+module.exports = sectionRoutes;

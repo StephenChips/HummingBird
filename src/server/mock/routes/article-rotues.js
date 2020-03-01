@@ -33,7 +33,7 @@ articleRoutes.patch('/about', function (req, res) {
 });
 
 articleRoutes.get('/:articleID', function (req, res) {
-    var acceptedType = req.accepts(['text/json', 'text/html']);
+    var acceptedType = req.accepts(['text/json']);
     if (acceptedType == 'text/html') {
         res.send(''); // TODO
     } else if (acceptedType == 'text/json') {
@@ -41,6 +41,7 @@ articleRoutes.get('/:articleID', function (req, res) {
         res.send(data)
     } else {
         throw new httpErrors.NotAcceptable();
+
     }
 });
 
@@ -55,7 +56,4 @@ articleRoutes.get('/', function (req, res) {
     }
 });
 
-module.exports = {
-    routes: articleRoutes,
-    mountPath: '/articles'
-};
+module.exports = articleRoutes;
