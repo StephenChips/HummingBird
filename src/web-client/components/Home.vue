@@ -8,7 +8,7 @@
             <ul v-if="techArticles && techArticles.length > 0">
                 <li v-for="article of techArticles" :key="article.url">
                     <em>{{ article.publishDate | formatDate }}&nbsp;»&nbsp;</em>
-                    <a :href="article.url">{{ article.title }}</a>
+                    <router-link :to="getArticleId(article.articleId)">{{ article.title }}</router-link>
                 </li>
             </ul>
             <div v-else>暂无文章</div>
@@ -20,7 +20,7 @@
             <ul v-if="lifeArticles && lifeArticles.length > 0">
                 <li v-for="article of lifeArticles" :key="article.url">
                     <em>{{ article.publishDate | formatDate }}&nbsp;»&nbsp;</em>
-                    <a :href="article.url">{{ article.title }}</a>
+                    <router-link :to="getArticleId(article.articleId)">{{ article.title }}</router-link>
                 </li>
             </ul>
             <div v-else>暂无文章</div>
@@ -36,25 +36,22 @@ import request from '../src/request';
 export default {
     name: 'Home',
 
-    created () {
+    async created () {
         this.$store.dispatch('app/loadCurrentSectionInfo', { sectionID: 'home' });
-        getArticles(this, 'life', 'lifeArticles');
-        getArticles(this, 'tech', 'techArticles');
-
-        function getArticles (vm, articleID, dataProp) {
-            console.log(vm.hasOwnProperty(dataProp), dataProp, vm)
-            if (vm.hasOwnProperty(dataProp)) {
-                request.getArticles(articleID, undefined, [0, 15]).then(articles => {
-                    vm[dataProp] = articles;
-                });
-            }
-        }
+        this.lifeArticles = await request.getArticlesBySection('life', [ 0, 10 ]);
+        this.techArticles = await request.getArticlesBySection('tech', [ 0, 10 ]);
     },
 
     data () {
         return {
             techArticles: [],
             lifeArticles: []
+        }
+    },
+
+    methods: {
+        getArticleId (articleId) {
+            return `/articles/${articleId}`;
         }
     },
 

@@ -29,7 +29,6 @@
 <script>
 import { Pagination } from 'element-ui';
 import ArticleList from './ArticleList.vue';
-import Paginate from './Paginate.vue';
 import { mapState } from 'vuex';
 import request from '../src/request';
 
@@ -93,7 +92,6 @@ export default {
 
     components: {
         ArticleList,
-        Paginate,
         'el-pagination': Pagination
     }
 }

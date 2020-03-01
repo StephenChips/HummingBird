@@ -13,7 +13,7 @@
 import request from '../src/request';
 import { mapState } from 'vuex';
 import WebsiteTitle from './WebsiteTitle.vue';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 
 
 const HeaderSize = Object.freeze({

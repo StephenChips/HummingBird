@@ -4,7 +4,7 @@
         <input v-if="editable" type="checkbox" :checked="article.selected" @input="$emit('select-article', { article, selected: $event.target.checked })"/>
         <span>{{ article.publishDate | formatDate }}</span>
         <span>»</span>
-        <a :href="article.url">{{ article.title }}</a>
+        <router-link :to="getArticleUrl(article.url)">{{ article.title }}</router-link>
     </li>
 </ul>
 </template>
@@ -14,6 +14,12 @@ export default {
     name: 'ArticleList',
 
     props: [ 'articleList', 'editable' ],
+
+    methods: {
+        getArticleUrl (articleId) {
+            return `/articles/${articleId}`;
+        }
+    },
 
     filters: {
         formatDate (timestamp) {

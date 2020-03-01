@@ -80,7 +80,9 @@ module.exports = env => {
     new CopyWebpackPlugin([
       { from: 'stylesheets', to: 'stylesheets' }
     ]),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      defaultSizes: 'parsed'
+    })
   ];
 
   config.devServer = {

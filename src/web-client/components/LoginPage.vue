@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import { LoginState as AuthLoginState } from "../src/auth";
 
 const LoginState = Object.freeze({

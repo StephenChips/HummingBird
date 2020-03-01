@@ -18,7 +18,7 @@
                         <div v-if="article.tag" class="tag">{{ article.tag }}</div>
                     </div>
                     <div class="article-title">
-                        <a :href="article.url">{{ article.title }}</a>
+                        <router-link :to="getArticleUrl(article.articleId)">{{ article.title }}</router-link>
                     </div>
                 </li>
             </ul>
@@ -65,6 +65,8 @@
 -->
 
 <script>
+import request from '../src/request';
+
 const SearchOption = Object.freeze({
     BY_TITLE: 'byTitle',
     BY_TAG: 'byTag'
@@ -79,7 +81,9 @@ export default {
     },
 
     mounted () {
-        this.search(this.searchText, this.searchOption);
+        if (this.searchText !== '') {
+            this.search();
+        }
     },
 
     data () {
@@ -96,70 +100,23 @@ export default {
             this.$router.push(`/search?s=${encodeURIComponent(event.target.value)}`);
         },
 
-        search (text, option) {
+        async search (text, option) {
             this.searchFailed = false;
 
             try {
                 if (option  == SearchOption.BY_TITLE) {
-                    this.searchResult = this.searchByTitle();
+                    this.searchResult = await request.searchArticlesByTitle(this.searchText)
                 } else if (option == SearchOption.BY_TAG) {
-                    this.searchResult = this.searchByTag();
+                    this.searchResult = await request.searchArticlesByTag(this.searchText);
                 }
+                console.log(this.searchResult)
             } catch (e) {
                 this.searchFailed = true;
-
             }
         },
 
-        searchByTitle () {
-            return [
-                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world'
-                },
-                                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world+1'
-                },
-                                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world+2'
-                },
-                                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world+3'
-                },
-                                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world+4'
-                },                {
-                    publishDate: new Date(),
-                    section: '生活区',
-                    tag: '旅游',
-                    title: '你好，世界',
-                    url: '/article/hello+world+5'
-                }
-
-            ];
-        },
-
-        searchByTag () {
-            return [];
+        getArticleUrl (articleId) {
+            return `/articles/${articleId}`;
         }
     },
 
@@ -182,7 +139,8 @@ export default {
     },
 
     filters: {
-        formatDate (date) {
+        formatDate (timestamp) {
+            var date = new Date(timestamp);
             var yyyy = date.getFullYear();
             var mm = date.getMonth() + 1;
             var dd = date.getDate();
