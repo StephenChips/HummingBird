@@ -8,7 +8,7 @@ which might override curtain rules.
 
 html {
     font-size: 16px; /* size of regular font  */
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-family:  Helvetica, 'Arial', 'Hiragino Sans GB', 'STHeiti Light', 'Microsoft YaHei', sans-serif;
 }
 
 body {
@@ -32,6 +32,11 @@ ol.plain {
     padding: 0;
 }
 
+ul.horizontal,
+ol.horizontal {
+    display: flex;
+}
+
 code, pre {
     font-family: 'Courier New', Courier, monospace;
 }
@@ -42,38 +47,6 @@ code, pre {
 
 .f-large {
     font-size: 18px;
-}
-
-.f-xs {
-    font-size: 12px;
-}
-
-.f-s {
-    font-size: 14px;
-}
-
-.f-b {
-    font-size: 16px;
-}
-
-.f-l {
-    font-size: 18px;
-}
-
-.f-xl {
-    font-size: 20px;
-}
-
-.f-display-1 {
-    font-size: 26px;
-}
-
-.f-display-2 {
-    font-size: 28px;
-}
-
-.f-display-3 {
-    font-size: 30px;
 }
 
 input {

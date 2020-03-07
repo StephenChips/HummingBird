@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.6.4",
+    "easymde": "^2.9.0",
     "element-ui": "^2.13.0",
     "escape-html": "^1.0.3",
     "events": "^3.0.0",

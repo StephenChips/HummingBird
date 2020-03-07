@@ -11,6 +11,7 @@ import NavigationView from '../components/NavigationView.vue';
 import ArticlePage from '../components/ArticlePage.vue';
 import SettingPage from '../components/setting/SettingPage.vue';
 import AccountSetting from '../components/setting/AccountSetting.vue';
+import ArticleEditPage from '../components/ArticleEditPage/index.vue';
 
 import { Auth } from './auth';
 
@@ -22,6 +23,20 @@ var routes = [
     {
         path: '/articles/:articleID',
         component: ArticlePage
+    },
+    {
+        path: '/articles/:articleID/edit',
+        component: ArticleEditPage,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/articles/new',
+        component: ArticleEditPage,
+        meta: {
+            requireLogin: true
+        }
     },
     {
         path: '/settings',

@@ -4,7 +4,7 @@
         <input v-if="editable" type="checkbox" :checked="article.selected" @input="$emit('select-article', { article, selected: $event.target.checked })"/>
         <span>{{ article.publishDate | formatDate }}</span>
         <span>»</span>
-        <router-link :to="getArticleUrl(article.url)">{{ article.title }}</router-link>
+        <router-link :to="getArticleUrl(article.articleId)">{{ article.title }}</router-link>
     </li>
 </ul>
 </template>

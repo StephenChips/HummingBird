@@ -72,6 +72,11 @@ export default {
         }, 200);
     },
 
+    beforeRouteEnter (to, from, next) {
+        console.log(to, from);
+        next();
+    },
+
     data () {
         return {
             LoginState: LoginState,
@@ -99,7 +104,8 @@ export default {
                 this.state = LoginState.SUCCESS;
 
                 window.setTimeout(() => {
-                    this.$router.push('/');
+                    console.log(this.$router)
+                    this.$router.go(-1);
                 }, 1000);
             }).catch(err => {
                 var state = err.message;

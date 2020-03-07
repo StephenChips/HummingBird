@@ -9,29 +9,33 @@
         <el-button v-if="hasLogin" type="text" @click="$store.dispatch('app/logout')">登出</el-button>
         <el-button v-else type="text" @click="$router.push('/login')">登录</el-button>
     </nav>
-    <header>
-        <div class="article-info">
-            <div>发布日期：{{ article.firstPublishTime | formatDate }}</div>
-            <el-button v-if="hasLogin" type="text" @click="enterEditMode">编辑</el-button>
-            <el-button v-if="hasLogin" style="color: #999" type="text" @click="deleteArticle">删除</el-button>
+    <div class="container">
+        <header>
+            <div class="article-info">
+                <div>发布日期：{{ article.firstPublishTime | formatDate }}</div>
+            </div>
+            <h1>{{ article.title }}</h1>
+        </header>
+        <main>
+            <div>
+                <el-button v-if="hasLogin" type="text" @click="gotoEditPage">编辑</el-button>
+                <el-button v-if="hasLogin" style="color: #999" type="text" @click="deleteArticle">删除</el-button>
+            </div>
+            <article id="article" v-html="article.content"></article>
+        </main>
+        <div class="relative-articles" v-if="hasRelativeArticles">
+            <h1>更多阅读</h1>
+            <ul class="relative-articles__list">
+                <li v-for="rltArticle of article.relativeArticles" :key="rltArticle.articleID">
+                    <router-link :to="rltArticle.path">
+                        {{ rltArticle.title }}
+                    </router-link>
+                </li>
+            </ul>
         </div>
-        <h1>{{ article.title }}</h1>
-    </header>
-    <main class="article">
-        <article class="article" v-html="article.content"></article>
-    </main>
-    <div class="relative-articles" v-if="hasRelativeArticles">
-        <h1>更多阅读</h1>
-        <ul class="relative-articles__list">
-            <li v-for="rltArticle of article.relativeArticles" :key="rltArticle.articleID">
-                <router-link :to="rltArticle.path">
-                    {{ rltArticle.title }}
-                </router-link>
-            </li>
-        </ul>
-    </div>
-    <div class="copyright">
-        <div class="f-small">蜂鸟博客，版权所有 2020</div>
+        <div class="copyright">
+            <div class="f-small">蜂鸟博客，版权所有 2020</div>
+        </div>
     </div>
 </div>
 </template>
@@ -45,11 +49,12 @@ export default {
     name: 'Article',
 
     created () {
+        console.log(this.$route.params)
         this.loadArticle(this.$route.params.articleID);
     },
 
     beforeRouteUpdate () {
-        this.loadArticle();
+        this.loadArticle(this.$route.params.articleID);
     },
 
     data () {
@@ -70,14 +75,16 @@ export default {
             console.log('delete article');
         },
 
-        enterEditMode () {
-            console.log('mode entered');
+        gotoEditPage () {
+            console.log(this.article)
+            this.$router.push({
+                path: `/articles/${this.article.articleID}/edit`
+            })
         }
     },
 
     filters: {
         formatDate (timestamp) {
-            console.log(timestamp)
             var date = new Date(timestamp);
 
             var yyyy = date.getFullYear();
@@ -94,7 +101,7 @@ export default {
                 && typeof this.article === 'object'
                 && Array.isArray(this.article.relativeArticles)
                 && this.article.relativeArticles.length > 0;
-        },  
+        },
         ...mapState('app', {
             hasLogin: state => state.hasLogin
         })
@@ -112,18 +119,19 @@ export default {
 
 <style scoped>
 .article-page {
-    width: 950px;
-    margin: 0 auto;
     color: #303133;
 }
 
 nav {
+    z-index: 1000;
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 3rem;
-    margin-top: 1rem;
     font-size: 14px;
+    padding: 1em;
 }
 
 nav .breadcrumb {
@@ -131,9 +139,9 @@ nav .breadcrumb {
     margin-right: auto;
 }
 
-header {
-    font-size: 1rem;
-    font-weight: normal;
+.container {
+    width: 950px;
+    margin: 0 auto;
 }
 
 header {
@@ -154,11 +162,20 @@ header h1 {
     margin-top: 1rem;
 }
 
-main {
+#article {
     margin: 0;
-    margin-top: 50px;
     line-height: 1.8;
+    overflow: hidden; /* bfc */
 }
+
+#article >>> *:first-child {
+    margin-top: 0;
+}
+
+#article >>> *:last-child {
+    margin-bottom: 0;
+}
+
 
 .relative-articles {
     margin-top: 5rem;

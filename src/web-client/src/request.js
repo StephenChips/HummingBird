@@ -46,9 +46,10 @@ export default {
 
     getArticleById (id) {
         return Promise.resolve({
-            articleId: id,
+            articleID: id,
             title: 'hello world',
             createdTime: new Date(2020, 1, 1, 8).getTime(),
+            hasPublished: false,
             firstPublishTime: new Date(2020, 1, 1, 9).getTime(),
             lastEditTime: new Date(2020, 1, 1, 9).getTime(),
             content: `<p>
