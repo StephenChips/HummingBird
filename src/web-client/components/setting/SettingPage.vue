@@ -23,7 +23,6 @@ export default {
         activedItemURL () {
             switch (this.$store.state.settingPage.activedPage) {
                 case SettingPages.ACCOUNT_CHANGE_PASSWORD:
-                    console.log('hello')
                     return '/settings/account';
                 default:
                     return '';

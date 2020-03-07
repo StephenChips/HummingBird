@@ -88,7 +88,7 @@ module.exports = env => {
   config.devServer = {
     contentBase: path.resolve(__dirname, './dist'),
     compress: true,
-    port: 8080
+    port: 18081
   };
 
   return config;
