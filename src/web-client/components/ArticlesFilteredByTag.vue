@@ -1,7 +1,7 @@
 <template>
 <div class="article-list-filtered-by-tag">
     <div class="edit-panel" v-if="hasLogin">
-        <button class="primary" @click="createArticle">新建文章</button>
+        <button class="primary" @click="$router.push('/articles/new')">新建文章</button>
         <button class="secondary" @click="deleteArticles">删除文章</button>
     </div>
 
@@ -57,10 +57,6 @@ export default {
     },
 
     methods: {
-        createArticle () {
-            console.log('createArticle');
-        },
-
         selectArticle ({ article, selected }) {
             this.$store.commit('sectionPage/selectArticle', { articleURL: article.url, selected });
         },

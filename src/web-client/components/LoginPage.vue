@@ -6,18 +6,18 @@
     </h1>
     <div class="login-hint">
         <transition name="fade" mode="out-in">
-        <div key="hint-login" v-if="state === LoginState.LOGIN" class="login-hint__hint">
-            请登录
-        </div>
-        <div key="hint-success" v-else-if="state === LoginState.SUCCESS" class="login-hint__hint">
-            登录成功
-        </div>
-        <div key="hint-user-not-exists" v-else-if="state === LoginState.USER_NOT_EXISTS" class="login-hint__hint">
-            账号不存在
-        </div>
-        <div key="hint-password-incorrect" v-else-if="state === LoginState.PASSWORD_INCORRECT" class="login-hint__hint">
-            密码错误
-        </div>
+            <div key="hint-login" v-if="state === LoginState.LOGIN" class="login-hint__hint">
+                请登录
+            </div>
+            <div key="hint-success" v-else-if="state === LoginState.SUCCESS" class="login-hint__hint">
+                登录成功
+            </div>
+            <div key="hint-user-not-exists" v-else-if="state === LoginState.USER_NOT_EXISTS" class="login-hint__hint">
+                账号不存在
+            </div>
+            <div key="hint-password-incorrect" v-else-if="state === LoginState.PASSWORD_INCORRECT" class="login-hint__hint">
+                密码错误
+            </div>
         </transition>
     </div>
     <form class="login-form" @submit.prevent="login">

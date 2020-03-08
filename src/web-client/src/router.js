@@ -12,17 +12,22 @@ import ArticlePage from '../components/ArticlePage.vue';
 import SettingPage from '../components/setting/SettingPage.vue';
 import AccountSetting from '../components/setting/AccountSetting.vue';
 import ArticleEditPage from '../components/ArticleEditPage/index.vue';
+import NotFoundPage from '../components/NotFoundPage/index.vue';
 
 import { Auth } from './auth';
 
 var routes = [
     {
+        path: '/404',
+        component: NotFoundPage
+    },
+    {
         path: '/login',
         component: LoginPage
     },
     {
-        path: '/articles/:articleID',
-        component: ArticlePage
+        path: '/articles',
+        redirect: '/404'
     },
     {
         path: '/articles/:articleID/edit',
@@ -37,6 +42,10 @@ var routes = [
         meta: {
             requireLogin: true
         }
+    },
+    {
+        path: '/articles/:articleID',
+        component: ArticlePage
     },
     {
         path: '/settings',

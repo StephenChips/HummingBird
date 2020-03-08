@@ -1,15 +1,16 @@
+// tag id + section ID is unique.
 const TAGS = [
-    { url: '/life/zh', name: '中文', id: 'zh' },
-    { url: '/life/lv-you', name: '旅游', id: 'lv-you' },
-    { url: '/tech/qian-duan', name: '前端', id: 'qian-duan' },
-    { url: '/tech/hou-duan', name: '后端', id: 'hou-duan'}
+    { url: '/life/zh', tagName: '中文', tagID: 'zh', sectionID: 'life' },
+    { url: '/life/lv-you', tagName: '旅游', tagID: 'lv-you', sectionID: 'life' },
+    { url: '/tech/qian-duan', tagName: '前端', tagID: 'qian-duan', sectionID: 'tech' },
+    { url: '/tech/hou-duan', tagName: '后端', tagID: 'hou-duan', sectionID: 'tech' }
 ];
 
+// section id is unique.
 var SECTIONS = [
-    { url: '/home', id: 'home', name: '主页' },
-    { url: '/', id: 'home', name: '主页' },
-    { url: '/life', id: 'life', name: '生活' },
-    { url: '/tech', id: 'tech', name: '技术' }
+    { url: '/home', sectionID: 'home', sectionName: '主页' },
+    { url: '/life', sectionID: 'life', sectionName: '生活' },
+    { url: '/tech', sectionID: 'tech', sectionName: '技术' }
 ];
 
 var ARTICLES = createArticles(100);
@@ -36,12 +37,16 @@ export default {
         return Promise.resolve();
     },
 
-    getTags (sectionID) {
+    getTagsOfSection (sectionID) {
         return Promise.resolve(TAGS);
     },
 
     getTag (sectionID, tagID) {
-        return Promise.resolve(TAGS.find(tag => tag.id === tagID));
+        return Promise.resolve(TAGS.find(tag => tag.id === tagID && tag.sectionID === sectionID));
+    },
+
+    getTagById (sectionID, tagID) {
+        return Promise.resolve(TAGS.find(tag => tag.id === tagID && tag.sectionID === sectionID));
     },
 
     getArticleById (id) {
@@ -214,7 +219,7 @@ export default {
         ])
     },
 
-    getArticles (sectionID, tagID, [start, end]) {
+    async getArticles (sectionID, tagID, [start, end]) {
         if (sectionID === undefined) {
             return [];
         }
@@ -227,7 +232,15 @@ export default {
                 return [];
             }
         }
-        return Promise.resolve(ARTICLES.slice(start, end));
+        return (ARTICLES.slice(start, end));
+    },
+
+    async updateArticle (oppts) {
+
+    },
+
+    async createArticle (opts) {
+
     },
 
     removeArticles(...articleURLs) {
@@ -236,7 +249,24 @@ export default {
         return Promise.resolve(ARTICLES);
     },
 
+    withdrawArticle () {
+
+    },
+
+    saveAndPublishArticle () {
+
+    },
+
+    saveArticle () {
+
+    },
+
+
     getSection (sectionID) {
+        return Promise.resolve(SECTIONS.find(section => section.id === sectionID));
+    },
+
+    getSectionById (sectionID) {
         return Promise.resolve(SECTIONS.find(section => section.id === sectionID));
     },
 
@@ -245,6 +275,10 @@ export default {
             return sectionURLs.findIndex(url => url === section.url) !== -1;
         });
         return Promise.resolve(result);
+    },
+
+    getAllSections () {
+        return Promise.resolve(SECTIONS);
     },
 
     getArticleCount(section, tags) {

@@ -4,7 +4,7 @@
         <div class="current-tag" v-if="currentTag">
             <div class="header heading">当前选中的文章系列</div>
             <div class="content">
-                <div>{{ currentTag.name }}</div>
+                <div>{{ currentTag.tagName }}</div>
                 <button @click="deselectTag"><span class="material-icons">close</span></button>
             </div>
         </div>
@@ -14,7 +14,7 @@
 
     <!-- 标签 -->
     <ul class="plain">
-        <li v-for="tag of tagList" :key="tag.url"><a href="#" @click.prevent="selectTag(tag)"> {{ tag.name }} </a></li>
+        <li v-for="tag of tagList" :key="tag.url"><a href="#" @click.prevent="selectTag(tag)"> {{ tag.tagName }} </a></li>
     </ul>
 </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     },
 
     created () {
-        request.getTags(this.sectionID).then(tagList => {
+        request.getTagsOfSection(this.sectionID).then(tagList => {
             this.tagList = tagList;
         });
     },

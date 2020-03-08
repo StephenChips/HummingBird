@@ -63,7 +63,7 @@ export default {
             console.log(command)
             switch (command) {
                 case 'NEW_ARTICLE':
-                    this.$router.push('/article/new');
+                    this.$router.push('/articles/new');
                     break;
                 case 'SET_ACCOUNT':
                     this.$router.push('/settings/account');

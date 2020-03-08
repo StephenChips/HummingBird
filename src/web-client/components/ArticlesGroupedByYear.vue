@@ -3,7 +3,7 @@
 <template>
 <div class="article-list-group-by-year">
     <div class="edit-panel" v-if="hasLogin">
-        <button class="primary">新建文章</button>
+        <button class="primary" @click="$router.push('/articles/new')">新建文章</button>
         <button class="secondary" @click="deleteArticles">删除文章</button>
     </div>
 
