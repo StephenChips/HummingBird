@@ -2,8 +2,14 @@
 <div class="navigation" :class="navClass">
     <WebsiteTitle />
     <ul class="plain section-list">
+        <li class="f-small section-link">
+            <a href="#" class="plain" @click.prevent="$router.push('/')">首页</a>
+        </li>
         <li v-for="section of sections" :key="section.url" class="f-small section-link">
-            <a href="#" :class="{ plain: true, current: section.id == currentSection.id }" @click.prevent="gotoSection(section)">{{ section.name }}</a>
+            <a href="#" :class="{
+                plain: true,
+                current: currentSection && section.sectionID == currentSection.sectionID
+            }" @click.prevent="gotoSection(section)">{{ section.sectionName }}</a>
         </li>
     </ul>
 </div>
@@ -25,8 +31,10 @@ export default {
     name: 'Navigation',
 
     created () {
+        console.log(this.currentSection);
+
         this.initWindowEvents();
-        request.getSections('/', '/tech', '/life').then(sections => {
+        request.getSections('tech', 'life').then(sections => {
             this.sections = sections;
         });
     },

@@ -6,7 +6,6 @@
             <el-breadcrumb-item :to="{ path: '/tech' }">技术区</el-breadcrumb-item>
             <el-breadcrumb-item>此文章</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-button v-if="!article.hasPublished" type="text" style="color: #909399;" @click="$router.go(-1)">返回</el-button>
         <el-button type="text" style="color: #909399;" @click="$router.go(-1)">返回</el-button>
     </nav>
     <div class="container">
@@ -118,6 +117,7 @@ function ErrorMessage (message, type) {
     this.message = message;
     this.type = type;
 }
+
 Object.setPrototypeOf(ErrorMessage.prototype, Error.prototype);
 ErrorMessage.prototype.name = 'ErrorMessage';
 
@@ -151,18 +151,18 @@ export default {
         this.article = article;
         this.isPageLoaded = true;
 
-        // BEWARE: Loading procedure having finished here, there are still last three steps to go:
+        // BEWARE: Loading procedure haven't finished here, there are still last three steps to go:
 
         /**
-         *  1. VM notice isPageLoaded is changed, and thus run its watcher.
+         *  1. VM notices isPageLoaded is changed, thus run its watcher.
          *  2. Inside the watcher, we set a `this.$nextTick(...)` callback.
          *  3. When the nick tick comes, we initialzie EasyMDE and set the article's content
          *     to it.
          *
-         *  The reason we have to set `this.$nextTick(...)` first instead directly update
+         *  The reason we do step two and three instead of directly updating
          *  the editor's content, is that the DOM isn't ready yet when we are processing the second
-         *  step. If we try intialize the editor's at the second step, we will end up with
-         *  a null exception.
+         *  step, and hence EasyMDE cannot be installed. If we try intializing the editor's at the
+         *  second step, we will end up with a null exception.
          */
     },
 
@@ -233,7 +233,7 @@ export default {
         },
 
         publish () {
-            this.forceUpdateArticle();
+            this.article.content = this.$editor.value();
             this.notifyWhenTaskIsFinished(async () => {
                 var errorReason = this.validate();
                 if (errorReason !== null) {
@@ -243,7 +243,8 @@ export default {
                     await request.updateArticle({
                         hasPublished: true,
                         title: this.article.title,
-                        content: this.article.content,
+                        content: this.article.content, //如果有content，就要提供contentType
+                        contentType: 'text/markdown',
                         articleID: this.article.articleID,
                         sectionID: this.article.sectionID,
                         tagID: this.article.tagID
@@ -260,7 +261,7 @@ export default {
         // So the function won't be called when the aritcle hasn't
         // publihsed yet.
         withdraw () {
-            this.forceUpdateArticle();
+            this.article.content = this.$editor.value();
             this.notifyWhenTaskIsFinished(async () => {
                 try {
                     await request.updateArticle({
@@ -277,7 +278,7 @@ export default {
         },
 
         save () {
-            this.forceUpdateArticle();
+            this.article.content = this.$editor.value();
             this.notifyWhenTaskIsFinished(async () => {
                 var errorMessage = this.validate();
                 if (errorMessage !== null) {
@@ -318,11 +319,6 @@ export default {
                 // No error.
                 return null;
             }
-        },
-
-        forceUpdateArticle () {
-            this.article.content = this.$editor.value();
-            console.log(this.article.content);
         },
 
         handleTagsInputChange (value) {

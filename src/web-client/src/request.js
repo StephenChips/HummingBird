@@ -1,4 +1,4 @@
-// tag id + section ID is unique.
+// tag.tagID + section ID is unique.
 const TAGS = [
     { url: '/life/zh', tagName: '中文', tagID: 'zh', sectionID: 'life' },
     { url: '/life/lv-you', tagName: '旅游', tagID: 'lv-you', sectionID: 'life' },
@@ -6,9 +6,8 @@ const TAGS = [
     { url: '/tech/hou-duan', tagName: '后端', tagID: 'hou-duan', sectionID: 'tech' }
 ];
 
-// section id is unique.
+// section.sectionID is unique.
 var SECTIONS = [
-    { url: '/home', sectionID: 'home', sectionName: '主页' },
     { url: '/life', sectionID: 'life', sectionName: '生活' },
     { url: '/tech', sectionID: 'tech', sectionName: '技术' }
 ];
@@ -42,11 +41,11 @@ export default {
     },
 
     getTag (sectionID, tagID) {
-        return Promise.resolve(TAGS.find(tag => tag.id === tagID && tag.sectionID === sectionID));
+        return Promise.resolve(TAGS.find(tag => tag.tagID === tagID && tag.sectionID === sectionID));
     },
 
     getTagById (sectionID, tagID) {
-        return Promise.resolve(TAGS.find(tag => tag.id === tagID && tag.sectionID === sectionID));
+        return Promise.resolve(TAGS.find(tag => tag.tagID === tagID && tag.sectionID === sectionID));
     },
 
     getArticleById (id) {
@@ -57,7 +56,8 @@ export default {
             hasPublished: false,
             firstPublishTime: new Date(2020, 1, 1, 9).getTime(),
             lastEditTime: new Date(2020, 1, 1, 9).getTime(),
-            content: `<p>
+            content: `\
+            <p>
             不知从何时起，HDR的名字开始出现在各大厂商的宣传语之中，从电视到投影仪，甚至近两年来的手机，
             都喜欢给自己的产品套上一个“支持HDR”的名号进行包装。作为一个2015年才真正诞生的标准化名词，HDR普及的迅速程度远超大家的想象，
             那么就让我们来了解一下，在厂商们纷乱的广告语之中，到底什么才是真正的HDR？
@@ -224,7 +224,7 @@ export default {
             return [];
         }
         else if (tagID !== undefined) {
-            if (TAGS.findIndex(tag => tag.id === tagID) === -1) {
+            if (TAGS.findIndex(tag => tag.tagID === tagID) === -1) {
                 return [];
             }
         } else {
@@ -245,8 +245,7 @@ export default {
 
     removeArticles(...articleURLs) {
         ARTICLES = ARTICLES.filter(article => !articleURLs.includes(article.url));
-        console.log(ARTICLES);
-        return Promise.resolve(ARTICLES);
+        return Promise.resolve();
     },
 
     withdrawArticle () {
@@ -263,17 +262,19 @@ export default {
 
 
     getSection (sectionID) {
-        return Promise.resolve(SECTIONS.find(section => section.id === sectionID));
+        console.log(sectionID)
+        return Promise.resolve(SECTIONS.find(section => section.sectionID === sectionID));
     },
 
     getSectionById (sectionID) {
-        return Promise.resolve(SECTIONS.find(section => section.id === sectionID));
+        return Promise.resolve(SECTIONS.find(section => section.sectionID === sectionID));
     },
 
-    getSections (...sectionURLs) {
+    getSections (...sectionIDs) {
         var result = SECTIONS.filter(section => {
-            return sectionURLs.findIndex(url => url === section.url) !== -1;
+            return sectionIDs.findIndex(id => id === section.sectionID) !== -1;
         });
+        console.log(sectionIDs, result)
         return Promise.resolve(result);
     },
 

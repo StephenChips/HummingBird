@@ -42,7 +42,7 @@ export default {
 
     methods: {
         selectTag (tag) {
-            if (this.currentTag === undefined || tag.id !== this.currentTag.id) {
+            if (this.currentTag === undefined || tag.tagID !== this.currentTag.tagID) {
                 this.$router.push(tag.url);
             }
         },

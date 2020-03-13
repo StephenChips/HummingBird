@@ -35,8 +35,6 @@ export default {
             } else if (!selected && index !== -1) {
                 state.selectedArticles.splice(index, 1);
             }
-
-            console.log(state.selectedArticles);
         },
 
         clearArticleSelection (state) {
