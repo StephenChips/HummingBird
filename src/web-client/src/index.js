@@ -7,6 +7,7 @@ import store from './store';
 
 import App from '@Components/App.vue';
 import { Auth } from "./auth";
+
 new Vue({
     el: '#app',
     render: h => h(App),

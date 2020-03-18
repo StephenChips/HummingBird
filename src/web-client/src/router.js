@@ -67,12 +67,8 @@ var routes = [
         children: [
             {
                 path: '/',
-                redirect: '/home',
-            },
-            {
-                path: '/home',
                 component: Home
-            },
+            }, 
             {
                 path: '/search',
                 component: SearchPage

@@ -1,30 +1,13 @@
 <template>
-<div>
+<div v-if="hasStoreInited">
     <Navigation />
-    <transition mode="out-in" name="fade">
-        <router-view :key="keyOfRouterView()" class="main-content"></router-view>
-    </transition>
+    <router-view class="main-content" />
 </div>
 </template>
 
 <script>
 import Navigation from './Navigation.vue';
 export default {
-    data () {
-        return {
-            transitionName: ''
-        }
-    },
-    methods: {
-        keyOfRouterView () {
-            var segments = this.$route.path.split('/');
-            if (segments.length >= 2) {
-                return segments[1];
-            } else {
-                return '###';
-            }
-        }
-    },
     watch: {
         $route (to, from) {
             var toPathFragments = to.path.split('/');
@@ -37,6 +20,12 @@ export default {
             }
         }
     },
+
+    computed: {
+        hasStoreInited () {
+            return this.$store.state.pages.hasStoreInited;
+        }
+    },
     components: { Navigation }
 }
 </script>
@@ -45,19 +34,4 @@ export default {
 .main-content {
     margin-top: 150px;
 }
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.25s;
-}
-
-.fade-enter-to,
-.fade-leave {
-    opacity: 1;
-}
-
 </style>

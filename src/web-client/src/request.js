@@ -262,7 +262,6 @@ export default {
 
 
     getSection (sectionID) {
-        console.log(sectionID)
         return Promise.resolve(SECTIONS.find(section => section.sectionID === sectionID));
     },
 
@@ -274,7 +273,6 @@ export default {
         var result = SECTIONS.filter(section => {
             return sectionIDs.findIndex(id => id === section.sectionID) !== -1;
         });
-        console.log(sectionIDs, result)
         return Promise.resolve(result);
     },
 

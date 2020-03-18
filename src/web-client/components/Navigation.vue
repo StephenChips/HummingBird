@@ -2,14 +2,11 @@
 <div class="navigation" :class="navClass">
     <WebsiteTitle />
     <ul class="plain section-list">
-        <li class="f-small section-link">
-            <a href="#" class="plain" @click.prevent="$router.push('/')">首页</a>
-        </li>
-        <li v-for="section of sections" :key="section.url" class="f-small section-link">
+        <li v-for="page of pages" :key="page.url" class="f-small section-link">
             <a href="#" :class="{
                 plain: true,
-                current: currentSection && section.sectionID == currentSection.sectionID
-            }" @click.prevent="gotoSection(section)">{{ section.sectionName }}</a>
+                current: currentPage && currentPage.url === page.url
+            }" @click.prevent="onClickLink(page.url)">{{ page.name }}</a>
         </li>
     </ul>
 </div>
@@ -31,8 +28,6 @@ export default {
     name: 'Navigation',
 
     created () {
-        console.log(this.currentSection);
-
         this.initWindowEvents();
         request.getSections('tech', 'life').then(sections => {
             this.sections = sections;
@@ -62,6 +57,12 @@ export default {
                     this.headerSize = HeaderSize.LARGE;
                 }
             }), 200);
+        },
+
+        onClickLink (url) {
+            console.log(url)
+            this.$store.commit('pages/SET_CURRENT_PAGE_BY_ID', { url });
+            this.$router.push(url);
         }
     },
 
@@ -71,9 +72,14 @@ export default {
                 'no-shadow': this.headerSize === HeaderSize.LARGE
             };
         },
-        ...mapState({
-            currentSection: state => state.app.currentSection
-        })
+
+        currentPage () {
+            return this.$store.state.pages.currentPage;
+        },
+
+        pages () {
+            return this.$store.state.pages.pages;
+        }
     },
 
     components: {
