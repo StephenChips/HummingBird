@@ -17,28 +17,16 @@ import TagList from './TagList.vue';
 import { mapState } from 'vuex';
 import store from '../src/store';
 
-function updateStore (to, from, next) {
-    var { sectionID, tagID } = to.params;
-
-    Promise.all([
-        store.dispatch('app/loadCurrentSectionInfo', { sectionID }),
-        store.dispatch('sectionPage/loadCurrentTagInfo', { sectionID, tagID })
-    ]).then(() => {
-        next();
-    });
-}
-
 export default {
     name: 'SectionPage',
 
-    beforeRouteEnter: updateStore,
-    beforeRouteUpdate: updateStore,
-
-    computed: {
-        ...mapState({
-            currentTag: state => state.sectionPage.currentTag,
-            currentSection: state => state.app.currentSection
-        })
+    data () {
+        return {
+            currentTag: null,
+            currentSection: {
+                name: '生活区'
+            }
+        }
     },
 
     components: { TagList }

@@ -1,15 +1,5 @@
 <template>
-<div class="navigation" :class="navClass">
-    <WebsiteTitle />
-    <ul class="plain section-list">
-        <li v-for="page of pages" :key="page.url" class="f-small section-link">
-            <a href="#" :class="{
-                plain: true,
-                current: currentPage && currentPage.url === page.url
-            }" @click.prevent="onClickLink(page.url)">{{ page.name }}</a>
-        </li>
-    </ul>
-</div>
+
 </template>
 
 <script>
@@ -27,17 +17,23 @@ const HeaderSize = Object.freeze({
 export default {
     name: 'Navigation',
 
-    created () {
-        this.initWindowEvents();
-        request.getSections('tech', 'life').then(sections => {
-            this.sections = sections;
-        });
-    },
-
     data () {
         return {
             headerSize: HeaderSize.LARGE,
-            sections: []
+            navLinks: [
+                {
+                    url: '/home',
+                    name: '主页'
+                },
+                {
+                    url: '/life',
+                    name: '生活'
+                },
+                {
+                    url: '/tech',
+                    name: '技术'
+                }
+            ]
         };
     },
 
@@ -48,20 +44,7 @@ export default {
             }
         },
 
-        initWindowEvents () {
-            window.addEventListener('scroll', throttle(() => {
-                const TRIGGER_OFFSET = 30;
-                if (this.headerSize == HeaderSize.LARGE && window.pageYOffset > TRIGGER_OFFSET) {
-                    this.headerSize = HeaderSize.SMALL;
-                } else if (this.headerSize == HeaderSize.SMALL && window.pageYOffset <= TRIGGER_OFFSET) {
-                    this.headerSize = HeaderSize.LARGE;
-                }
-            }), 200);
-        },
-
         onClickLink (url) {
-            console.log(url)
-            this.$store.commit('pages/SET_CURRENT_PAGE_BY_ID', { url });
             this.$router.push(url);
         }
     },
@@ -71,14 +54,6 @@ export default {
             return {
                 'no-shadow': this.headerSize === HeaderSize.LARGE
             };
-        },
-
-        currentPage () {
-            return this.$store.state.pages.currentPage;
-        },
-
-        pages () {
-            return this.$store.state.pages.pages;
         }
     },
 

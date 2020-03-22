@@ -4,8 +4,6 @@ import VueRouter from "vue-router";
 import Home from '../components/Home.vue';
 import LoginPage from '../components/LoginPage.vue';
 import SectionPage from '../components/SectionPage.vue';
-import ArticlesGroupedByYear from '../components/ArticlesGroupedByYear.vue';
-import ArticlesFilteredByTag from '../components/ArticlesFilteredByTag.vue';
 import SearchPage from '../components/SearchPage.vue';
 import NavigationView from '../components/NavigationView.vue';
 import ArticlePage from '../components/ArticlePage.vue';
@@ -68,7 +66,7 @@ var routes = [
             {
                 path: '/',
                 component: Home
-            }, 
+            },
             {
                 path: '/search',
                 component: SearchPage
@@ -76,17 +74,6 @@ var routes = [
             {
                 path: '/:sectionID',
                 component: SectionPage,
-                children: [
-                    {
-                        path: '',
-                        component: ArticlesGroupedByYear,
-                        props: true
-                    },
-                    {
-                        path: ':tagID',
-                        component: ArticlesFilteredByTag
-                    }
-                ]
             },
         ]
     }
