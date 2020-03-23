@@ -4,7 +4,6 @@ import VueRouter from "vue-router";
 import Home from '../components/Home.vue';
 import LoginPage from '../components/LoginPage.vue';
 import SectionPage from '../components/SectionPage.vue';
-import SearchPage from '../components/SearchPage.vue';
 import NavigationView from '../components/NavigationView.vue';
 import ArticlePage from '../components/ArticlePage.vue';
 import SettingPage from '../components/setting/SettingPage.vue';
@@ -66,10 +65,6 @@ var routes = [
             {
                 path: '/',
                 component: Home
-            },
-            {
-                path: '/search',
-                component: SearchPage
             },
             {
                 path: '/:sectionID',

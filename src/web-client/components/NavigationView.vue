@@ -1,51 +1,57 @@
 <template>
 <div>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper" v-if="sectionLinks !== null">
         <div class="nav">
             <div class="nav-title">
                 蜂鸟博客
             </div>
             <!-- 在导航栏上只显示三个Section的链接 -->
-
+            <router-link to="/" :class="{
+                    link: true,
+                    plain: true,
+                    selected: currentPage && currentPage === 'home'
+                }">
+                主页
+            </router-link>
             <router-link
-                v-for="link of navLinks.slice(0, 3)"
-                :key="link.id"
+                v-for="link of sectionLinks.slice(0, 3)"
+                :key="link.sectionID"
                 href="#"
                 :to="link.url"
                 :class="{
                     link: true,
                     plain: true,
-                    selected: currentSection && currentSection.id === link.id
+                    selected: currentPage && currentPage === link.sectionID
                 }">
-                {{ link.name }}
+                {{ link.sectionName }}
             </router-link>
 
-            <!-- 如果有更多的Section，把他们收进下拉菜单中-->
+            <!-- 如果有更多的Section，把他们收进下拉菜单中 -->
             <!-- 
                 这里增加一个包裹的DIV的原因，是让下拉菜单的开启按钮位于中间，且高度不占满整个导航条，以防止下拉菜单定位离启按钮太远。如下图：
 
                 =========================
                   |  +---------+  |
-                  |  |  Button |  |  导航条区域        √   
+                  |  |  Button |  |  导航条区域        √   （注意：内部Button的边框是隐藏的）
                   |  +---------+  |
                 =========================
 
                 ===========================
                    |              |
-                   |    Button    |   导航条区域         ×
+                   |    Button    |   导航条区域       ×
                    |              |
                 ===========================
             -->
-            <div style="display: flex; align-items: center;">
-                <el-dropdown v-if="navLinks.length > 3" class="link plain">
+            <div style="display: flex; align-items: center;" v-if="sectionLinks.length > 3">
+                <el-dropdown class="link plain">
                     <span class="el-dropdown-link">
                         <a class="link plain" href="javascript:;">更多<i class="el-icon-arrow-down el-icon--right"></i></a>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item
-                            v-for="link of navLinks.slice(3)"
-                            :key="link.id">
-                            {{ link.name }}
+                            v-for="link of sectionLinks.slice(3)"
+                            :key="link.sectionID">
+                            {{ link.sectionName }}
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -53,7 +59,7 @@
 
         </div>
     </div>
-    <router-view class="main-content" @switch-view="onSwitchView"/>
+    <router-view class="main-content"/>
     <footer>
         <span>蜂鸟博客 {{currentYear}}</span>
         <el-divider direction="vertical"></el-divider>
@@ -71,46 +77,49 @@ import Dropdown from 'element-ui/lib/dropdown';
 import DropdownMenu from 'element-ui/lib/dropdown-menu';
 import DropdownItem from 'element-ui/lib/dropdown-item';
 
+import request from '../src/request';
+
 export default {
 
     data: function () {
         return {
             currentYear: new Date().getFullYear(),
 
-            currentSection: { id: 'home' },
+            currentPage: null,
 
-            navLinks: [
-                {
-                    url: '/home',
-                    name: '主页',
-                    id: 'home',
-                },
-                {
-                    url: '/life',
-                    name: '生活',
-                    id: 'life'
-                },
-                {
-                    url: '/tech',
-                    name: '技术',
-                    id: 'tech'
-                },
-                {
-                    url: '/photos',
-                    name: '照片',
-                    id: 'photos'
-                }
-            ]
+            sectionLinks: null,
         };
     },
 
-    created () {
+    async created () {
+        var articleSections = await request.getAllSections();
+        this.sectionLinks = articleSections.map(section => ({
+            url: '/' + section.sectionID,
+            sectionName: section.sectionName,
+            sectionID: section.sectionID
+        }));
 
+        console.log(this.sectionLinks)
+        this.decideCurrentSectionID(this.$route);
+    },
+
+    beforeRouteUpdate (to, from, next) {
+        this.decideCurrentSectionID(to);
+        next();
     },
 
     methods: {
-        onSwitchView (event) {
-            console.log(event);
+        decideCurrentSectionID (route) {
+            if (route.path === '/' || route.path === '/home') {
+                this.currentPage = 'home';
+            } else if (typeof route.params.sectionID === 'string') {
+                console.log(route)
+                this.currentPage = route.params.sectionID;
+            } else {
+                this.currentPage = '';
+            }
+
+            console.log(this.currentPage)
         }
     },
 
@@ -202,6 +211,7 @@ export default {
 }
 
 footer {
+    margin-top: 32px;
     text-align: center;
     color: #909399; 
 }

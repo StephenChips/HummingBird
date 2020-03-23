@@ -8,8 +8,8 @@ const TAGS = [
 
 // section.sectionID is unique.
 var SECTIONS = [
-    { url: '/life', sectionID: 'life', sectionName: '生活' },
-    { url: '/tech', sectionID: 'tech', sectionName: '技术' }
+    { sectionID: 'life', sectionName: '生活' },
+    { sectionID: 'tech', sectionName: '技术' }
 ];
 
 var ARTICLES = createArticles(100);
